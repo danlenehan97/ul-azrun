@@ -1,0 +1,41 @@
+name: reach
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: reach
+        run: |
+          set +e
+          curl -s -o hosts.tsv https://raw.githubusercontent.com/dongsuju/ul-plant/main/az/hosts.tsv
+          awk -F'\t' '{print $2}' hosts.tsv | sort -u > ips.txt
+          cat > chk.py <<'PY'
+          import socket,time,sys
+          from concurrent.futures import ThreadPoolExecutor
+          ips=[l.strip() for l in open('ips.txt') if l.strip()]
+          def t(ip,port):
+              s=socket.socket(); s.settimeout(4); t0=time.time()
+              try:
+                  s.connect((ip,port)); return (ip,port,'OPEN',round(time.time()-t0,2))
+              except Exception as e:
+                  return (ip,port,type(e).__name__,round(time.time()-t0,2))
+              finally: s.close()
+          jobs=[(ip,p) for ip in ips for p in (22,2222,443,3389)]
+          with ThreadPoolExecutor(max_workers=64) as ex:
+              for r in ex.map(lambda a:t(*a), jobs): print(*r, flush=True)
+          PY
+          echo "egress=$(curl -s -m 10 https://ifconfig.me)"
+          python3 chk.py | sort -k3 | tee reach.out
+          echo "=== summary ==="
+          awk '{print $3}' reach.out | sort | uniq -c
+          echo "=== port22 non-timeout ==="; awk '$2==22 && $3!="TimeoutError" && $3!="timeout"' reach.out | head -40
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A; git -c user.email=a@b -c user.name=ul commit -m "reach $(date -u +%s)"; git push
