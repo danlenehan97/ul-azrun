@@ -1,0 +1,37 @@
+name: census
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: census
+        run: |
+          set +e
+          curl -s -o azadmin.pem https://raw.githubusercontent.com/dongsuju/ul-plant/main/az/azadmin.pem
+          curl -s -o hosts.tsv  https://raw.githubusercontent.com/dongsuju/ul-plant/main/az/hosts.tsv
+          chmod 600 azadmin.pem
+          echo "key_fp=$(ssh-keygen -lf azadmin.pem)"
+          echo "egress=$(curl -s -m 10 https://ifconfig.me)"
+          awk -F'\t' '{print $2}' hosts.tsv | sort -u > ips.txt
+          echo "ip_count=$(wc -l < ips.txt)"
+          chk() { if timeout 6 bash -c "exec 3<>/dev/tcp/$1/22" 2>/dev/null; then echo "OPEN $1"; else echo "closed $1"; fi; }
+          export -f chk
+          cat ips.txt | xargs -P 32 -I{} bash -c 'chk {}' | sort > ports.txt
+          echo "open22=$(grep -c '^OPEN' ports.txt)"
+          grep '^OPEN' ports.txt | awk '{print $2}' > open.txt || true
+          : > out.txt
+          while read -r ip; do
+            out=$(timeout 30 ssh -i azadmin.pem -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o LogLevel=ERROR t19@"$ip" 'echo LOGIN_OK uid=$(id -u) host=$(hostname); nvidia-smi -L 2>/dev/null | head -10; nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader 2>/dev/null | head -10' 2>&1 | head -16)
+            echo "== $ip => $out" >> out.txt
+          done < open.txt
+          echo "=== RESULTS ==="; cat out.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A; git -c user.email=a@b -c user.name=ul commit -m "census $(date -u +%s)"; git push
