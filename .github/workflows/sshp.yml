@@ -1,0 +1,32 @@
+name: sshp
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  s:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: sshprobe
+        run: |
+          set +e
+          curl -s -o azadmin.pem https://raw.githubusercontent.com/dongsuju/ul-plant/main/az/azadmin.pem
+          chmod 600 azadmin.pem
+          echo "egress=$(curl -s -m 10 https://ifconfig.me)"
+          for hp in 20.97.252.251:443 20.125.42.21:443 20.205.187.223:443 20.205.187.223:3389 20.97.252.251:2222; do
+            ip=${hp%:*}; p=${hp#*:}
+            echo "===== $ip:$p banner"
+            timeout 8 bash -c "exec 3<>/dev/tcp/$ip/$p; timeout 4 head -c 120 <&3 | xxd | head -3" 2>&1 | head -4
+            for u in t19 root azureuser ubuntu; do
+              o=$(timeout 25 ssh -p $p -i azadmin.pem -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o LogLevel=ERROR $u@$ip 'echo LOGIN_OK; id; hostname; nvidia-smi -L 2>/dev/null | head -4' 2>&1 | head -8)
+              echo "--- $u@$ip:$p => $o"
+              case "$o" in *LOGIN_OK*) echo "!!! SEAT $u@$ip:$p";; esac
+            done
+          done 2>&1 | tee sshp.out
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A; git -c user.email=a@b -c user.name=ul commit -m "sshp $(date -u +%s)"; git push
