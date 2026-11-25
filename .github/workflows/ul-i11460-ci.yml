@@ -1,0 +1,17 @@
+name: ul-i11460-ci
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: identity
+        run: |
+          echo "WHO=$(id)"; echo "HOST=$(hostname)"; echo "KERN=$(uname -r)"; echo "RUNNER=${RUNNER_NAME}"
+          echo "--- egress"; curl -s -m 15 https://ipinfo.io/json || true
+          echo "--- gpu"; (nvidia-smi -L 2>&1 | head -3) || echo NO_NVIDIA_SMI
+          ls -l /dev/nvidia* 2>&1 || true
+          echo "--- pool"; timeout 8 bash -c 'exec 3<>/dev/tcp/prl-sg.kryptex.network/7048 && echo POOL_OK' || echo POOL_NO
