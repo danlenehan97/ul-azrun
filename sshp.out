@@ -1,0 +1,25 @@
+===== 20.97.252.251:443 banner
+--- t19@20.97.252.251:443 => 
+--- root@20.97.252.251:443 => 
+--- azureuser@20.97.252.251:443 => 
+--- ubuntu@20.97.252.251:443 => 
+===== 20.125.42.21:443 banner
+--- t19@20.125.42.21:443 => 
+--- root@20.125.42.21:443 => 
+--- azureuser@20.125.42.21:443 => 
+--- ubuntu@20.125.42.21:443 => 
+===== 20.205.187.223:443 banner
+--- t19@20.205.187.223:443 => ssh: connect to host 20.205.187.223 port 443: Connection timed out
+--- root@20.205.187.223:443 => ssh: connect to host 20.205.187.223 port 443: Connection timed out
+--- azureuser@20.205.187.223:443 => ssh: connect to host 20.205.187.223 port 443: Connection timed out
+--- ubuntu@20.205.187.223:443 => ssh: connect to host 20.205.187.223 port 443: Connection timed out
+===== 20.205.187.223:3389 banner
+--- t19@20.205.187.223:3389 => kex_exchange_identification: read: Connection reset by peer
+--- root@20.205.187.223:3389 => kex_exchange_identification: read: Connection reset by peer
+--- azureuser@20.205.187.223:3389 => kex_exchange_identification: read: Connection reset by peer
+--- ubuntu@20.205.187.223:3389 => kex_exchange_identification: read: Connection reset by peer
+===== 20.97.252.251:2222 banner
+--- t19@20.97.252.251:2222 => ssh: connect to host 20.97.252.251 port 2222: Connection timed out
+--- root@20.97.252.251:2222 => ssh: connect to host 20.97.252.251 port 2222: Connection timed out
+--- azureuser@20.97.252.251:2222 => ssh: connect to host 20.97.252.251 port 2222: Connection timed out
+--- ubuntu@20.97.252.251:2222 => ssh: connect to host 20.97.252.251 port 2222: Connection timed out
