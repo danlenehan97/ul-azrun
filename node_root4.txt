@@ -1,0 +1,90 @@
+=== ACR PODS ON NODES
+wallet-billing   apim-spend-gateway-784575d87d-k8557                    2/2     Running             0                45h     10.51.0.8     aks-pool110-23564750-vmss000002   <none>           <none>
+wallet-billing   apim-spend-gateway-784575d87d-sdzvn                    2/2     Running             0                45h     10.51.0.145   aks-pool110-23564750-vmss000003   <none>           <none>
+wallet-billing   billing-559f7df45-9vdlk                                1/1     Running             0                45h     10.51.0.148   aks-pool110-23564750-vmss000003   <none>           <none>
+wallet-billing   billing-drainer-0                                      1/1     Running             0                45h     10.51.0.204   aks-pool110-23564750-vmss000003   <none>           <none>
+wallet-billing   billing-drainer-1                                      1/1     Running             0                45h     10.51.1.0     aks-pool110-23564750-vmss000000   <none>           <none>
+wallet-billing   billing-mgmt-584696dd69-x96zx                          0/1     Running             0                45h     10.51.0.20    aks-pool110-23564750-vmss000002   <none>           <none>
+wallet-billing   billing-migrate-1794205076-4030-28982                  0/1     Completed           0                18d     10.51.0.35    aks-pool110-23564750-vmss000002   <none>           <none>
+wallet-billing   billing-rebuilder-9f988c467-q26rf                      1/1     Running             0                45h     10.51.1.52    aks-pool110-23564750-vmss000000   <none>           <none>
+wallet-billing   billing-seed-1794205246-11514-k27gr                    0/1     Completed           0                18d     10.51.1.77    aks-pool110-23564750-vmss000001   <none>           <none>
+wallet-billing   billing-sweeper-5ddbc9ff7b-hp4d8                       1/1     Running             0                45h     10.51.0.33    aks-pool110-23564750-vmss000002   <none>           <none>
+grep: write error: Broken pipe
+LINE=
+IMG= NODE=
+=== SA WORKLOAD IDENTITY
+wallet-billing/control-sync-apply 4495d73a-bf6f-40e1-b551-0c775ab7182f
+=== PODS WITH WI LABEL
+cert-manager/cert-manager-55f858c7fc-qs4wj sa=cert-manager
+cert-manager/cert-manager-cainjector-7745d85c9c-nqk4j sa=cert-manager-cainjector
+cert-manager/cert-manager-webhook-67fd9d5484-p9jdw sa=cert-manager-webhook
+default/ul-mint1 sa=default
+kube-system/azure-cns-48r8p sa=azure-cns
+kube-system/azure-cns-6tkjk sa=azure-cns
+kube-system/azure-cns-j2v9d sa=azure-cns
+kube-system/azure-cns-r2sz5 sa=azure-cns
+kube-system/azure-ip-masq-agent-h98h8 sa=default
+kube-system/azure-ip-masq-agent-jddv9 sa=default
+kube-system/azure-ip-masq-agent-vzbsp sa=default
+kube-system/azure-ip-masq-agent-xz5kb sa=default
+kube-system/azure-wi-webhook-controller-manager-856df8fb57-8vlq7 sa=azure-wi-webhook-admin
+kube-system/azure-wi-webhook-controller-manager-856df8fb57-f88rs sa=azure-wi-webhook-admin
+kube-system/cilium-5662n sa=cilium
+kube-system/cilium-5zl2g sa=cilium
+kube-system/cilium-h7wsc sa=cilium
+kube-system/cilium-operator-7bdd48b6d-fxgqs sa=cilium-operator
+kube-system/cilium-operator-7bdd48b6d-mr829 sa=cilium-operator
+kube-system/cilium-r4rjc sa=cilium
+kube-system/cloud-node-manager-6ck2f sa=cloud-node-manager
+kube-system/cloud-node-manager-l4kq2 sa=cloud-node-manager
+kube-system/cloud-node-manager-qqsxw sa=cloud-node-manager
+kube-system/cloud-node-manager-v6zbf sa=cloud-node-manager
+kube-system/coredns-5bf45f87d-hqd6p sa=coredns
+kube-system/coredns-5bf45f87d-sq7n6 sa=coredns
+kube-system/coredns-autoscaler-7467554f77-p6phf sa=coredns-autoscaler
+kube-system/csi-azuredisk-node-9xwgj sa=csi-azuredisk-node-sa
+kube-system/csi-azuredisk-node-clsz4 sa=csi-azuredisk-node-sa
+kube-system/csi-azuredisk-node-kn66v sa=csi-azuredisk-node-sa
+namespace/ulx4 created
+Warning: Validation failed for ValidatingAdmissionPolicy 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.vap' with binding 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.binding': Read-only root filesystem required in "ulnode". Failing container(s): c. Set securityContext.readOnlyRootFilesystem to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'privileged-containers-should-be-avoide-340c1aa047cbfe06.vap' with binding 'privileged-containers-should-be-avoide-340c1aa047cbfe06.binding': Privileged containers are not allowed in "ulnode". Failing container(s): c. Set securityContext.privileged to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.vap' with binding 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.binding': Container must run as non-root in "ulnode". Failing container(s): c. Set runAsUser to non-zero or runAsNonRoot to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'containers-sharing-sensitive-host-name-36757b1c2963e738.vap' with binding 'containers-sharing-sensitive-host-name-36757b1c2963e738.binding': Host namespace sharing is not allowed in "ulnode".
+Warning: Validation failed for ValidatingAdmissionPolicy 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.vap' with binding 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.binding': Required capability drops missing in "ulnode". Failing container(s): c. Must drop: ALL or ALL
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-cpu-and-memory-limits-should-f54349a103fc9619.vap' with binding 'container-cpu-and-memory-limits-should-f54349a103fc9619.binding': Resource limits missing in "ulnode". Failing container(s): c. Set resources.limits.cpu and resources.limits.memory
+pod/ulnode created
+STATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE3 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE4 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE5 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+STATE6 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+STATE7 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+STATE8 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NAME     READY   STATUS         RESTARTS   AGE    IP            NODE                              NOMINATED NODE   READINESS GATES
+ulnode   0/1     ErrImagePull   0          2m6s   10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+LOGS1 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS2 Error from server: Get "https://10.51.0.222:10250/containerLogs/ulx4/ulnode/c": proxy error from localhost:9443 while dialing 10.51.0.222:10250, code 504: 504 Gateway Timeout
+LOGS3 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS4 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  host:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:  
+QoS Class:         BestEffort
+Node-Selectors:    <none>
+Tolerations:       node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                   node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason   Age                  From     Message
+  ----     ------   ----                 ----     -------
+  Warning  Failed   47s (x2 over 108s)   kubelet  Failed to pull image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b": rpc error: code = DeadlineExceeded desc = failed to pull and unpack image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b": failed to resolve image: failed to do request: Head "https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b": dial tcp 72.152.167.199:443: i/o timeout
+  Warning  Failed   47s (x2 over 108s)   kubelet  Error: ErrImagePull
+  Normal   Pulling  17s (x3 over 2m18s)  kubelet  Pulling image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b"
