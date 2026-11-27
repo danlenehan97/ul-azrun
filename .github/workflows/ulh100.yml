@@ -1,0 +1,32 @@
+name: ulh100
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/ulh100.yml'
+permissions:
+  contents: write
+concurrency: ulh100
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: ladder
+        run: |
+          set +e
+          mkdir -p k
+          base64 -d kb.b64 > k.tgz
+          tar xzf k.tgz -C k
+          chmod 600 k/* 2>/dev/null
+          bash ul/h100.sh 2>&1 | tee out.log | tail -120
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          tar czf out.tgz out out.log 2>/dev/null
+          base64 -w0 out.tgz > out.tgz.b64 && rm -f out.tgz
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulh100 $(date -u +%s)"
+          git push
