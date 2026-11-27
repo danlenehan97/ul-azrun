@@ -1,0 +1,15 @@
+HOSTMAP=login.microsoftonline.com=20.190.155.132,management.azure.com=4.150.240.10
+USE billing-559f7df45-9vdlk acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/wallet-billing unlabeled
+pod/ulwi5 created
+namespace/wallet-billing labeled
+WISTATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE3 Running {"running":{"startedAt":"2026-11-27T17:11:05Z"}}
+WISTATE4 Running {"running":{"startedAt":"2026-11-27T17:11:05Z"}}
+WISTATE5 Running {"running":{"startedAt":"2026-11-27T17:11:05Z"}}
+WISTATE6 Succeeded {"terminated":{"containerID":"containerd://ec1879b37fe24058f5ad43eaccf304a7e1d5af7f03d3215f6e5f3bb0c4c47385","exitCode":0,"finishedAt":"2026-11-27T17:11:45Z","reason":"Completed","startedAt":"2026-11-27T17:11:05Z"}}
+LOGS1 MAP {'login.microsoftonline.com': '20.190.155.132', 'management.azure.com': '4.150.240.10'}
+AUTHERR URLError(TimeoutError('timed out'))
+MAP {'login.microsoftonline.com': '20.190.155.132', 'management.azure.com': '4.150.240.10'}
+AUTHERR URLError(TimeoutError('timed out'))
