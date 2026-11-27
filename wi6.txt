@@ -1,0 +1,19 @@
+=== WI SAs
+wallet-billing/control-sync-apply cid=4495d73a-bf6f-40e1-b551-0c775ab7182f
+USE acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/wallet-billing unlabeled
+base64: /var/run/secrets/azure/tokens/azure-identity-token: No such file or directory
+pod/ulwi6 created
+namespace/wallet-billing labeled
+WISTATE1 Pending
+WISTATE2 Pending
+WISTATE3 Pending
+WISTATE4 Succeeded
+LOGSLEN 7
+TOKB64=
+
+TB_LEN 0
+ASSERT_LEN 0
+
+CID=4495d73a-bf6f-40e1-b551-0c775ab7182f TID=62974d97-13b6-40c9-8576-f1ab2905b6cf
+AUTHERR 401 b'{"error":"invalid_client","error_description":"AADSTS7000216: \'client_assertion\', \'client_secret\' or \'request\' is required for the \'client_credentials\' grant type. Trace ID: 8e828414-9e53-4c40-91a8-839d45693c00 Correlation ID: 0c2107c2-3163-4271-8ffc-1d5139006a9b Timestamp: 2026-11-27 17:35:56Z","error_codes":[7000216],"timestamp":"2026-11-27 17:35:56Z","trace_id":"8e828414-9e53-4c40-91a8-839d4569'
