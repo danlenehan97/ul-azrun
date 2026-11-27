@@ -1,0 +1,301 @@
+=== KUBECONFIG ul/kc/all-datapath.yaml
+--- CTX aks-g42us-tfdemo-dev
+NAME                                STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+aks-nodepool1-17616631-vmss000000   Ready    <none>   33d   v1.35.8   10.224.0.4    <none>        Ubuntu 24.04.5 LTS   6.8.0-1070-azure   containerd://2.3.6-1
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-g42americas
+NAME                                STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+aks-nodepool1-11577397-vmss000000   Ready    <none>   15d   v1.35.8   10.224.0.4    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-kashif
+E1127 15:54:02.851663    2545 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:02.860989    2545 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:02.873397    2545 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:02.888376    2545 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:02.898374    2545 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-97jtvolk.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+--- CTX aks-g42us-tfdemo-kashif-datapath-eastus
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-23564750-vmss000000   Ready    <none>   20d   v1.36.4   10.51.0.222   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000001   Ready    <none>   20d   v1.36.4   10.51.1.75    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000002   Ready    <none>   20d   v1.36.4   10.51.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000003   Ready    <none>   20d   v1.36.4   10.51.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-kashif-datapath-swedencentral
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-34641514-vmss000000   Ready    <none>   16d   v1.36.4   10.52.0.6     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-34641514-vmss000001   Ready    <none>   16d   v1.36.4   10.52.1.75    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-34641514-vmss000002   Ready    <none>   16d   v1.36.4   10.52.0.5     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-34641514-vmss000003   Ready    <none>   16d   v1.36.4   10.52.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-kashif-portal
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-22581314-vmss000000   Ready    <none>   25d   v1.36.4   10.50.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+aks-pool110-22581314-vmss000001   Ready    <none>   25d   v1.36.4   10.50.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-perf
+E1127 15:54:04.582114    2630 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.589943    2630 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.604446    2630 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.611803    2630 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.618749    2630 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-hrfb36cm.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+--- CTX aks-g42us-tfdemo-staging
+E1127 15:54:04.754101    2646 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.761900    2646 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.778549    2646 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.786509    2646 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:04.794767    2646 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-1v9rolig.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+--- CTX aks-g42us-tfdemo-staging-datapath-eastus
+NAME                              STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-25187468-vmss000000   Ready    <none>   17d     v1.36.4   10.51.1.75    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-25187468-vmss000001   Ready    <none>   17d     v1.36.4   10.51.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-25187468-vmss000002   Ready    <none>   17d     v1.36.4   10.51.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-25187468-vmss000003   Ready    <none>   17d     v1.36.4   10.51.0.222   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-switchb-24056077-vmss000000   Ready    <none>   7d18h   v1.36.4   10.51.2.37    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-switchb-24056077-vmss000001   Ready    <none>   7d18h   v1.36.4   10.51.1.184   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Warning: the list may be incomplete: webhook authorizer does not support user rule resolution
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-staging-datapath-swedencentral
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-41946831-vmss000000   Ready    <none>   17d   v1.36.4   10.52.0.6     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-41946831-vmss000001   Ready    <none>   17d   v1.36.4   10.52.1.75    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-41946831-vmss000002   Ready    <none>   17d   v1.36.4   10.52.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-41946831-vmss000003   Ready    <none>   17d   v1.36.4   10.52.0.5     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-staging-portal
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-38247563-vmss000000   Ready    <none>   17d   v1.36.4   10.50.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-38247563-vmss000001   Ready    <none>   17d   v1.36.4   10.50.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+--- CTX aks-g42us-tfdemo-subrata
+E1127 15:54:06.434959    2713 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.442533    2713 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.455433    2713 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.462225    2713 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.468840    2713 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfdemo--1f9934-q49m2ism.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+--- CTX aks-g42us-tfgateway-poc
+E1127 15:54:06.594340    2729 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.600497    2729 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.608305    2729 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.618667    2729 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+E1127 15:54:06.631537    2729 memcache.go:265] couldn't get current server API group list: Get "https://aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io:443/api?timeout=20s": dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+Unable to connect to the server: dial tcp: lookup aks-g42us--rg-g42us-tfgatew-1f9934-fyfr2dv5.hcp.eastus.azmk8s.io on 127.0.0.53:53: no such host
+--- CTX fairweather-dev
+E1127 15:54:06.752283    2745 memcache.go:265] couldn't get current server API group list: Get "https://fairweather-dev-dns-pggwtjd9.hcp.uaenorth.azmk8s.io:443/api?timeout=20s": getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+E1127 15:54:06.752595    2745 memcache.go:265] couldn't get current server API group list: Get "https://fairweather-dev-dns-pggwtjd9.hcp.uaenorth.azmk8s.io:443/api?timeout=20s": getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+E1127 15:54:06.753972    2745 memcache.go:265] couldn't get current server API group list: Get "https://fairweather-dev-dns-pggwtjd9.hcp.uaenorth.azmk8s.io:443/api?timeout=20s": getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+E1127 15:54:06.754208    2745 memcache.go:265] couldn't get current server API group list: Get "https://fairweather-dev-dns-pggwtjd9.hcp.uaenorth.azmk8s.io:443/api?timeout=20s": getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+E1127 15:54:06.755575    2745 memcache.go:265] couldn't get current server API group list: Get "https://fairweather-dev-dns-pggwtjd9.hcp.uaenorth.azmk8s.io:443/api?timeout=20s": getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+Unable to connect to the server: getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+Unable to connect to the server: getting credentials: exec: fork/exec /usr/local/bin/kubelogin: no such file or directory
+=== KUBECONFIG ul/kc/datapath-eastus.yaml
+--- CTX aks-g42us-tfdemo-kashif-datapath-eastus
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-23564750-vmss000000   Ready    <none>   20d   v1.36.4   10.51.0.222   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000001   Ready    <none>   20d   v1.36.4   10.51.1.75    <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000002   Ready    <none>   20d   v1.36.4   10.51.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+aks-pool110-23564750-vmss000003   Ready    <none>   20d   v1.36.4   10.51.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1073-azure (amd64)   containerd://2.3.7-4
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
+=== KUBECONFIG ul/kc/portal.yaml
+--- CTX aks-g42us-tfdemo-kashif-portal
+NAME                              STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-pool110-22581314-vmss000000   Ready    <none>   25d   v1.36.4   10.50.0.113   <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+aks-pool110-22581314-vmss000001   Ready    <none>   25d   v1.36.4   10.50.0.4     <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+*.*                                             []                  []               [*]
+                                                [*]                 []               [*]
+selfsubjectreviews.authentication.k8s.io        []                  []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                  []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                  []               [create]
+                                                [/api/*]            []               [get]
+                                                [/api]              []               [get]
+                                                [/apis/*]           []               [get]
+                                                [/apis]             []               [get]
+                                                [/healthz]          []               [get]
+                                                [/healthz]          []               [get]
+                                                [/livez]            []               [get]
+                                                [/livez]            []               [get]
+                                                [/openapi/*]        []               [get]
+                                                [/openapi]          []               [get]
+                                                [/readyz]           []               [get]
+                                                [/readyz]           []               [get]
+                                                [/version/]         []               [get]
+                                                [/version/]         []               [get]
