@@ -1,0 +1,97 @@
+=== CTX aks-g42us-tfdemo-dev
+node/aks-nodepool1-17616631-vmss000000
+default/ul-32123-host Completed aks-nodepool1-17616631-vmss000000
+default/ul-i31659-az Completed aks-nodepool1-17616631-vmss000000
+default/ul-i31659-h Completed aks-nodepool1-17616631-vmss000000
+default/ul-mp-dv1 Completed aks-nodepool1-17616631-vmss000000
+default/ulprobe-1795714961 Completed aks-nodepool1-17616631-vmss000000
+default/ulprobe2-1795715256 Completed aks-nodepool1-17616631-vmss000000
+kube-system/azure-cns-ljgk6 Running aks-nodepool1-17616631-vmss000000
+kube-system/azure-ip-masq-agent-26dgd Running aks-nodepool1-17616631-vmss000000
+kube-system/azure-wi-webhook-controller-manager-7757f85dc4-7wc72 Running aks-nodepool1-17616631-vmss000000
+kube-system/azure-wi-webhook-controller-manager-7757f85dc4-b57kg Running aks-nodepool1-17616631-vmss000000
+kube-system/cilium-operator-86cc484d5b-zdr82 Running aks-nodepool1-17616631-vmss000000
+kube-system/cilium-vxgw2 Running aks-nodepool1-17616631-vmss000000
+=== CTX aks-g42us-tfdemo-g42americas
+node/aks-nodepool1-11577397-vmss000000
+cert-manager/cert-manager-7dd5fd898d-qxjls Running aks-nodepool1-11577397-vmss000000
+cert-manager/cert-manager-cainjector-f555478d-4l85s Running aks-nodepool1-11577397-vmss000000
+cert-manager/cert-manager-webhook-69d4696bcf-jzfjc Running aks-nodepool1-11577397-vmss000000
+default/ul-i31659-az Completed aks-nodepool1-11577397-vmss000000
+default/ul-i31659-h Completed aks-nodepool1-11577397-vmss000000
+kube-system/azure-cns-g7zwc Running aks-nodepool1-11577397-vmss000000
+kube-system/azure-ip-masq-agent-k9lbv Running aks-nodepool1-11577397-vmss000000
+kube-system/azure-wi-webhook-controller-manager-65b46dcdd7-79shs Running aks-nodepool1-11577397-vmss000000
+kube-system/azure-wi-webhook-controller-manager-65b46dcdd7-jj8hz Running aks-nodepool1-11577397-vmss000000
+kube-system/cilium-operator-86cc484d5b-rzwc6 Running aks-nodepool1-11577397-vmss000000
+kube-system/cilium-vsklm Running aks-nodepool1-11577397-vmss000000
+kube-system/cloud-node-manager-hkhj5 Running aks-nodepool1-11577397-vmss000000
+=== CTX aks-g42us-tfdemo-kashif-datapath-eastus
+node/aks-pool110-23564750-vmss000000
+node/aks-pool110-23564750-vmss000001
+node/aks-pool110-23564750-vmss000002
+node/aks-pool110-23564750-vmss000003
+wallet-billing/control-sync-apply cid=4495d73a-bf6f-40e1-b551-0c775ab7182f
+cert-manager/cert-manager-55f858c7fc-qs4wj Running aks-pool110-23564750-vmss000001
+cert-manager/cert-manager-cainjector-7745d85c9c-nqk4j Running aks-pool110-23564750-vmss000002
+cert-manager/cert-manager-webhook-67fd9d5484-p9jdw Running aks-pool110-23564750-vmss000000
+default/ul-i31659-az Completed aks-pool110-23564750-vmss000002
+default/ul-i31659-h Completed aks-pool110-23564750-vmss000002
+default/ul-mint1 Completed aks-pool110-23564750-vmss000000
+kube-system/azure-cns-48r8p Running aks-pool110-23564750-vmss000001
+kube-system/azure-cns-6tkjk Running aks-pool110-23564750-vmss000003
+kube-system/azure-cns-j2v9d Running aks-pool110-23564750-vmss000002
+kube-system/azure-cns-r2sz5 Running aks-pool110-23564750-vmss000000
+kube-system/azure-ip-masq-agent-h98h8 Running aks-pool110-23564750-vmss000003
+kube-system/azure-ip-masq-agent-jddv9 Running aks-pool110-23564750-vmss000002
+=== CTX aks-g42us-tfdemo-kashif-datapath-swedencentral
+node/aks-pool110-34641514-vmss000000
+node/aks-pool110-34641514-vmss000001
+node/aks-pool110-34641514-vmss000002
+node/aks-pool110-34641514-vmss000003
+wallet-billing/control-sync-apply cid=92ae649f-e4ae-4bcf-b167-f87ce5d38e82
+cert-manager/cert-manager-55f858c7fc-rkd7d Running aks-pool110-34641514-vmss000003
+cert-manager/cert-manager-cainjector-7745d85c9c-zvncf Running aks-pool110-34641514-vmss000003
+cert-manager/cert-manager-webhook-67fd9d5484-mjltp Running aks-pool110-34641514-vmss000000
+default/ul-dp-15945 Completed aks-pool110-34641514-vmss000000
+default/ul-i31659-az Completed aks-pool110-34641514-vmss000001
+default/ul-i31659-h Completed aks-pool110-34641514-vmss000001
+default/ul-mint1 Completed aks-pool110-34641514-vmss000002
+default/ul-sw-16035 Completed aks-pool110-34641514-vmss000001
+default/ul-swcert-16059 Completed aks-pool110-34641514-vmss000002
+kube-system/azure-cns-6pt2m Running aks-pool110-34641514-vmss000001
+kube-system/azure-cns-jdwwv Running aks-pool110-34641514-vmss000000
+kube-system/azure-cns-lzwkw Running aks-pool110-34641514-vmss000002
+=== CTX aks-g42us-tfdemo-kashif-portal
+node/aks-pool110-22581314-vmss000000
+node/aks-pool110-22581314-vmss000001
+cert-manager/cert-manager-55f858c7fc-r5258 Running aks-pool110-22581314-vmss000000
+cert-manager/cert-manager-cainjector-7745d85c9c-phlh9 Running aks-pool110-22581314-vmss000000
+cert-manager/cert-manager-webhook-67fd9d5484-qrltl Running aks-pool110-22581314-vmss000001
+default/kp-api Completed aks-pool110-22581314-vmss000001
+default/kp-app Completed aks-pool110-22581314-vmss000001
+default/kp-host2 Completed aks-pool110-22581314-vmss000000
+default/kp-host3 Completed aks-pool110-22581314-vmss000000
+default/kp-imds Completed aks-pool110-22581314-vmss000001
+default/kp-imds2 Completed aks-pool110-22581314-vmss000001
+default/kp-pgdump Completed aks-pool110-22581314-vmss000000
+default/kp-psql Completed aks-pool110-22581314-vmss000000
+default/kp-sb Completed aks-pool110-22581314-vmss000001
+=== CTX aks-g42us-tfdemo-staging-datapath-swedencentral
+node/aks-pool110-41946831-vmss000000
+node/aks-pool110-41946831-vmss000001
+node/aks-pool110-41946831-vmss000002
+node/aks-pool110-41946831-vmss000003
+wallet-billing/control-sync-apply cid=c436a85b-f27b-4701-8bee-78b0c2a378cf
+cloudflared/cloudflared-75fccddf98-5mrpq Running aks-pool110-41946831-vmss000001
+cloudflared/cloudflared-75fccddf98-swb5d Running aks-pool110-41946831-vmss000000
+default/ul-i31659-az Completed aks-pool110-41946831-vmss000002
+default/ul-i31659-h Completed aks-pool110-41946831-vmss000002
+default/ul-i31659-n0 ImagePullBackOff aks-pool110-41946831-vmss000000
+default/ul-i31659-n1 ImagePullBackOff aks-pool110-41946831-vmss000001
+default/ul-i31659-n2 Completed aks-pool110-41946831-vmss000002
+default/ul-i31659-n3 Completed aks-pool110-41946831-vmss000003
+default/ul-i31659-node Completed aks-pool110-41946831-vmss000002
+default/ul-nettest Completed aks-pool110-41946831-vmss000003
+kube-system/azure-cns-dp4fw Running aks-pool110-41946831-vmss000001
+kube-system/azure-cns-lzhp7 Running aks-pool110-41946831-vmss000003
