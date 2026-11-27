@@ -1,0 +1,21 @@
+TRIPLES 19
+AUTH 62974d97-13b6-40c9-8576-f1ab2905b6cf 4f4c782e-88e4-48aa-a30d-37d893962c5e P-_8Q.. => 401 invalid_client AADSTS7000222: The provided client secret keys for app '4f4c782e-88e4-48aa-a30d-37d893962c5e' are expired. Vis
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 BS.8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 Fvb8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 O1h8Q.. => 401 invalid_client AADSTS7000229: The client application b9590f55-e173-495c-9010-15beb8611a43 is missing service principal in the
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 TW_8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 Xur8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH e8adc959-bf67-48e0-95b4-318b5f73946c b9590f55-e173-495c-9010-15beb8611a43 ZIg8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 BS.8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 Fvb8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 O1h8Q.. => 401 invalid_client AADSTS7000229: The client application b9590f55-e173-495c-9010-15beb8611a43 is missing service principal in the
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 TLh8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 TW_8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 Xur8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+AUTH c3b32785-891b-4be9-90c2-c6d313ab4895 b9590f55-e173-495c-9010-15beb8611a43 ZIg8Q.. => 401 invalid_client AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secre
+NO_ARM_TOKEN
