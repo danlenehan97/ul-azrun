@@ -1,0 +1,43 @@
+=== ACR PODS
+CAND billing-559f7df45-9vdlk acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-drainer-0 acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-drainer-1 acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-mgmt-584696dd69-x96zx acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-migrate-1794205076-4030-28982 acrg42ustfdemokashif.azurecr.io/wallet-billing:d627749b
+CAND billing-rebuilder-9f988c467-q26rf acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-seed-1794205246-11514-k27gr acrg42ustfdemokashif.azurecr.io/wallet-billing:d627749b
+CAND billing-sweeper-5ddbc9ff7b-hp4d8 acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND billing-wallet-updater-7cd4d7c947-xdx69 acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND control-sync-apply-58c9db64dd-265dv acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+CAND control-sync-apply-58c9db64dd-wlnxz acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+CAND drain-monitor-7577b688f5-5dqnr acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND driver-6755c86ccb-4v7vp acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND openmeter-forwarder-5fc458f7d6-78m82 acrg42ustfdemokashif.azurecr.io/usage-forwarder:73cdfa9b
+CAND redis-watch-6fb67fb565-zjrwl acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+CAND ul-db2 acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+PODLINE=billing-559f7df45-9vdlk acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+USE billing-559f7df45-9vdlk acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/wallet-billing unlabeled
+cat: /var/run/secrets/azure/tokens/azure-identity-token: No such file or directory
+pod/ulwi3 created
+namespace/wallet-billing labeled
+WISTATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE3 Running {"running":{"startedAt":"2026-11-27T17:01:43Z"}}
+WISTATE4 Running {"running":{"startedAt":"2026-11-27T17:01:43Z"}}
+WISTATE5 Succeeded {"terminated":{"containerID":"containerd://82000f8b25a7f36e2165ca36401e060788adf43cc8be3d87d1e9ab8c1e96e6b3","exitCode":0,"finishedAt":"2026-11-27T17:02:03Z","reason":"Completed","startedAt":"2026-11-27T17:01:43Z"}}
+LOGS1 TOOLS: /usr/bin/python3 /usr/bin/python /usr/bin/curl /usr/bin/wget
+total 4
+drwxrwxrwt 3 root root  100 Nov 27 17:01 .
+drwxr-xr-x 3 root root 4096 Nov 27 17:01 ..
+drwxr-xr-x 2 root root   60 Nov 27 17:01 ..2026_11_27_17_01_12.4280385821
+lrwxrwxrwx 1 root root   32 Nov 27 17:01 ..data -> ..2026_11_27
+TOOLS: /usr/bin/python3 /usr/bin/python /usr/bin/curl /usr/bin/wget
+total 4
+drwxrwxrwt 3 root root  100 Nov 27 17:01 .
+drwxr-xr-x 3 root root 4096 Nov 27 17:01 ..
+drwxr-xr-x 2 root root   60 Nov 27 17:01 ..2026_11_27_17_01_12.4280385821
+lrwxrwxrwx 1 root root   32 Nov 27 17:01 ..data -> ..2026_11_27_17_01_12.4280385821
+lrwxrwxrwx 1 root root   27 Nov 27 17:01 azure-identity-token -> ..data/azure-identity-token
+ENV 62974d97-13b6-40c9-8576-f1ab2905b6cf 4495d73a-bf6f-40e1-b551-0c775ab7182f /var/run/secrets/azure/tokens/azure-identity-token
+AUTHERR <urlopen error [Errno -3] Temporary failure in name resolution>
