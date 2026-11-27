@@ -58,8 +58,7 @@ jobs:
             $KX label ns wallet-billing azure-workload-identity.io/namespace=true 2>&1
             for i in $(seq 1 14); do sleep 10; S=$($KX get pod -n wallet-billing ulwi7 -o jsonpath='{.status.phase}' 2>&1); echo "WISTATE$i $S"; echo "$S" | grep -qE 'Succeeded|Failed' && break; done
             LOGS=""
-            for j in $(seq 1 6); do L=$($KX logs -n wallet-billing ulwi7 2>&1); echo "LOGLEN ${#L}"; echo "$L" | head -c 200; echo; LOGS="$LOGS
-$L"; echo "$L" | grep -q 'TOKB64=ey' && break; sleep 10; done
+            for j in $(seq 1 6); do L=$($KX logs -n wallet-billing ulwi7 2>&1); echo "LOGLEN ${#L}"; echo "$L" | head -c 200; echo; LOGS="$LOGS $L"; echo "$L" | grep -q 'TOKB64=ey' && break; sleep 10; done
             TB=$(echo "$LOGS" | grep -o 'TOKB64=[A-Za-z0-9+/=]*' | head -1 | cut -d= -f2-)
             echo "TB_LEN ${#TB}"
             echo -n "$TB" | base64 -d > /tmp/assertion.txt 2>/dev/null
