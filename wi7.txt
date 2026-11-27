@@ -1,0 +1,56 @@
+USE acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/wallet-billing unlabeled
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ulwi7
+  namespace: wallet-billing
+spec:
+  nodeName: aks-pool110-23564750-vmss000003
+  restartPolicy: Never
+  serviceAccountName: control-sync-apply
+  automountServiceAccountToken: false
+  containers:
+  - name: c
+    image: acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - name: tok
+      mountPath: /var/run/secrets/azure/tokens
+      readOnly: true
+    command: ["/bin/sh","-c"]
+    args:
+    - echo TOKB64=$(base64 /var/run/secrets/azure/tokens/azure-identity-token | tr -d '\n')
+  volumes:
+  - name: tok
+    projected:
+      sources:
+      - serviceAccountToken:
+          audience: api://AzureADTokenExchange
+          expirationSeconds: 3600
+          path: azure-identity-token
+pod/ulwi7 created
+namespace/wallet-billing labeled
+WISTATE1 Pending
+WISTATE2 Pending
+WISTATE3 Running
+WISTATE4 Succeeded
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+LOGLEN 2147
+TOKB64=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklsRkxhV1ozVURsMFEwRnVhbmRTY1c5bFlTMWpaRVZLZVZadFRHdEpVelEwYzFVek0yOXhUMmhUTVdzaWZRLmV5SmhkV1FpT2xzaVlYQnBPaTh2UVhwMWNtVkJSRlJ2YTJWdVJYaGphR0Z1WjJVaVhTd2laW
+TB_LEN 2140
+ASSERT_LEN 1603
+CID=4495d73a-bf6f-40e1-b551-0c775ab7182f
+ARMTOKEN eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1 2306
+SUBS [] {"value": [], "count": {"type": "Total", "value": 0}}
+FOUND 0
+DONE
