@@ -1,0 +1,83 @@
+=== NODES GPU CAPACITY
+NAME                              GPU      SKU                POOL
+aks-pool110-23564750-vmss000000   <none>   Standard_D8as_v5   pool110
+aks-pool110-23564750-vmss000001   <none>   Standard_D8as_v5   pool110
+aks-pool110-23564750-vmss000002   <none>   Standard_D8as_v5   pool110
+aks-pool110-23564750-vmss000003   <none>   Standard_D8as_v5   pool110
+=== PODS
+NAMESPACE        NAME                                                   READY   STATUS              RESTARTS         AGE     IP            NODE                              NOMINATED NODE   READINESS GATES
+cert-manager     cert-manager-55f858c7fc-qs4wj                          1/1     Running             0                20d     10.51.1.180   aks-pool110-23564750-vmss000001   <none>           <none>
+cert-manager     cert-manager-cainjector-7745d85c9c-nqk4j               1/1     Running             0                20d     10.51.0.108   aks-pool110-23564750-vmss000002   <none>           <none>
+cert-manager     cert-manager-webhook-67fd9d5484-p9jdw                  1/1     Running             0                20d     10.51.1.25    aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      azure-cns-48r8p                                        1/1     Running             0                20d     10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      azure-cns-6tkjk                                        1/1     Running             0                20d     10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      azure-cns-j2v9d                                        1/1     Running             0                20d     10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      azure-cns-r2sz5                                        1/1     Running             0                20d     10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      azure-ip-masq-agent-h98h8                              1/1     Running             0                20d     10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      azure-ip-masq-agent-jddv9                              1/1     Running             0                20d     10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      azure-ip-masq-agent-vzbsp                              1/1     Running             0                20d     10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      azure-ip-masq-agent-xz5kb                              1/1     Running             0                20d     10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      azure-wi-webhook-controller-manager-856df8fb57-8vlq7   1/1     Running             0                20d     10.51.0.82    aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      azure-wi-webhook-controller-manager-856df8fb57-f88rs   1/1     Running             0                20d     10.51.1.106   aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      cilium-5662n                                           3/3     Running             0                7d15h   10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      cilium-5zl2g                                           3/3     Running             0                7d15h   10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      cilium-h7wsc                                           3/3     Running             0                7d15h   10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      cilium-operator-7bdd48b6d-fxgqs                        1/1     Running             0                7d15h   10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      cilium-operator-7bdd48b6d-mr829                        1/1     Running             0                7d15h   10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      cilium-r4rjc                                           3/3     Running             0                7d15h   10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      cloud-node-manager-6ck2f                               1/1     Running             0                15d     10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      cloud-node-manager-l4kq2                               1/1     Running             0                15d     10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      cloud-node-manager-qqsxw                               1/1     Running             0                15d     10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      cloud-node-manager-v6zbf                               1/1     Running             0                15d     10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      coredns-5bf45f87d-hqd6p                                1/1     Running             0                20d     10.51.0.67    aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      coredns-5bf45f87d-sq7n6                                1/1     Running             0                20d     10.51.0.126   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      coredns-autoscaler-7467554f77-p6phf                    1/1     Running             0                20d     10.51.1.37    aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      csi-azuredisk-node-9xwgj                               3/3     Running             0                20d     10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      csi-azuredisk-node-clsz4                               3/3     Running             0                20d     10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      csi-azuredisk-node-kn66v                               3/3     Running             0                20d     10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      csi-azuredisk-node-tc2b4                               3/3     Running             0                20d     10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      csi-azurefile-node-8c4kc                               4/4     Running             0                20d     10.51.0.113   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      csi-azurefile-node-9fwzz                               4/4     Running             0                20d     10.51.0.4     aks-pool110-23564750-vmss000002   <none>           <none>
+kube-system      csi-azurefile-node-pzxwh                               4/4     Running             0                20d     10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      csi-azurefile-node-xxlkx                               4/4     Running             0                20d     10.51.1.75    aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      defender-admission-controller-7fbf6dc99c-4mzdk         1/1     Running             0                20d     10.51.1.47    aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      konnectivity-agent-5c78dc79dc-xsg9s                    1/1     Running             0                20d     10.51.0.161   aks-pool110-23564750-vmss000003   <none>           <none>
+kube-system      konnectivity-agent-5c78dc79dc-z66j6                    1/1     Running             0                20d     10.51.1.136   aks-pool110-23564750-vmss000001   <none>           <none>
+kube-system      konnectivity-agent-autoscaler-5b658f6697-p7vmg         1/1     Running             0                20d     10.51.1.55    aks-pool110-23564750-vmss000000   <none>           <none>
+kube-system      metrics-server-6c6645cc78-8szk2                        2/2     Running             0                6d16h   10.51.0.219   aks-pool110-23564750-vmss000003   <none>           <none>
+=== NODE NAME
+NODE=aks-pool110-23564750-vmss000000
+namespace/ulx created
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-cpu-and-memory-limits-should-f54349a103fc9619.vap' with binding 'container-cpu-and-memory-limits-should-f54349a103fc9619.binding': Resource limits missing in "ulnode". Failing container(s): c. Set resources.limits.cpu and resources.limits.memory
+Warning: Validation failed for ValidatingAdmissionPolicy 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.vap' with binding 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.binding': Container must run as non-root in "ulnode". Failing container(s): c. Set runAsUser to non-zero or runAsNonRoot to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.vap' with binding 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.binding': Read-only root filesystem required in "ulnode". Failing container(s): c. Set securityContext.readOnlyRootFilesystem to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.vap' with binding 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.binding': Service account token mounted at default path in "ulnode". Set spec.automountServiceAccountToken to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.vap' with binding 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.binding': Projected service account token volume is not allowed in "ulnode". Remove serviceAccountToken from projected volume sources
+Warning: Validation failed for ValidatingAdmissionPolicy 'containers-sharing-sensitive-host-name-36757b1c2963e738.vap' with binding 'containers-sharing-sensitive-host-name-36757b1c2963e738.binding': Host namespace sharing is not allowed in "ulnode".
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-images-should-be-deployed-on-ca960821291ec7af.vap' with binding 'container-images-should-be-deployed-on-ca960821291ec7af.binding': Disallowed container image in "ulnode". Failing image(s): ubuntu:24.04. Images must match one of: ^[a-zA-Z0-9-]+\.azurecr\.io/.*$
+Warning: Validation failed for ValidatingAdmissionPolicy 'privileged-containers-should-be-avoide-340c1aa047cbfe06.vap' with binding 'privileged-containers-should-be-avoide-340c1aa047cbfe06.binding': Privileged containers are not allowed in "ulnode". Failing container(s): c. Set securityContext.privileged to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.vap' with binding 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.binding': Required capability drops missing in "ulnode". Failing container(s): c. Must drop: ALL or ALL
+pod/ulnode created
+NAME     READY   STATUS              RESTARTS   AGE   IP            NODE                              NOMINATED NODE   READINESS GATES
+ulnode   0/1     ContainerCreating   0          30s   10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+Error from server: Get "https://10.51.0.222:10250/containerLogs/ulx/ulnode/c": proxy error from localhost:9443 while dialing 10.51.0.222:10250, code 504: 504 Gateway Timeout
+  PodScheduled                True 
+Volumes:
+  host:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:  
+  kube-api-access-4tgjz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason   Age   From     Message
+  ----    ------   ----  ----     -------
+  Normal  Pulling  31s   kubelet  Pulling image "ubuntu:24.04"
