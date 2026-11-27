@@ -1,0 +1,85 @@
+=== IMAGES
+acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+acrg42ustfdemokashif.azurecr.io/usage-forwarder:73cdfa9b
+acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b
+acrg42ustfdemokashif.azurecr.io/wallet-billing:d627749b
+clickhouse/clickhouse-server:25.12.3-alpine@sha256:74da41cd61db84f652c6364fd30d59e19b7276d34f7c82515f5f0e70d6f325da
+confluentinc/cp-kafka:8.0.3@sha256:db5eac24a1d15a1689fa89642ef97a7e3bc4f55ad5159a07b213c4dc7d0114e3
+confluentinc/cp-kafka:8.1.6@sha256:8293182e4b673f2c23af6f84ab9a506633fa7ba993ca7c12f8432a5efeb39e74
+curlimages/curl:8.10.1
+docker.io/library/alpine:3.20
+ghcr.io/llm-d/llm-d-inference-sim:v0.9.0
+ghcr.io/openmeterio/openmeter:v1.0.0-beta.235@sha256:ceb2bb51630ea3fbbb79ada75740c9d03c12b6886d527fd1890ce59a71dbdb34
+grafana/alloy:v1.20.1@sha256:2aa2099af76c0098d4af7a4d6e48f86cb66dc1a000222ad927a1c67c6542d13f
+grafana/grafana:13.2.0@sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b
+grafana/loki:3.7.0@sha256:c316b7c7589a5eeca843b6926c7446149d18300b79ac8538dc4ae063bc478da2
+grafana/tempo:3.1.0@sha256:3076b8dcdfb32fd6bc5ccef85e7b7313e6199b9cb84366257fc17ecb696db5fd
+mcr.microsoft.com/azure-api-management/gateway:2.12.1
+mcr.microsoft.com/azuredefender/stable/pod-collector:1.0.278
+mcr.microsoft.com/azuredefender/stable/pod-collector:1.0.278 mcr.microsoft.com/azuredefender/stable/low-level-collector:2.2.42
+mcr.microsoft.com/azuredefender/stable/security-publisher:1.1.75
+mcr.microsoft.com/containernetworking/cilium/cilium-distroless:v1.19.10-261107 mcr.microsoft.com/containernetworking/v2/azure-iptables-monitor:v0.0.8-4 mcr.microsoft.com/containernetworking/v2/cilium-log-collector:v0.0.6-3
+mcr.microsoft.com/containernetworking/cilium/operator-generic:v1.19.10-261107
+mcr.microsoft.com/containernetworking/v2/azure-cns:v1.8.15-4
+mcr.microsoft.com/mdc/prd/defender-admission-controller:0.11.26
+mcr.microsoft.com/oss/v2/azure/ip-masq-agent-v2:v0.1.16-22
+mcr.microsoft.com/oss/v2/azure/workload-identity/webhook:v1.5.1-27
+mcr.microsoft.com/oss/v2/kubernetes-csi/azurefile-csi:v1.35.11-6 mcr.microsoft.com/oss/v2/kubernetes-csi/livenessprobe:v2.19.0-15 mcr.microsoft.com/oss/v2/kubernetes-csi/csi-node-driver-registrar:v2.17.0-15 mcr.microsoft.com/oss/v2/kubernetes-csi/azurefile-csi:v1.35.11-6
+mcr.microsoft.com/oss/v2/kubernetes-csi/livenessprobe:v2.19.0-15 mcr.microsoft.com/oss/v2/kubernetes-csi/csi-node-driver-registrar:v2.17.0-15 mcr.microsoft.com/oss/v2/kubernetes-csi/azuredisk-csi:v1.34.7-7
+mcr.microsoft.com/oss/v2/kubernetes/apiserver-network-proxy/agent:v0.32.1-22
+mcr.microsoft.com/oss/v2/kubernetes/autoscaler/addon-resizer:v1.8.23-37 mcr.microsoft.com/oss/v2/kubernetes/metrics-server:v0.8.0-30
+mcr.microsoft.com/oss/v2/kubernetes/autoscaler/cluster-proportional-autoscaler:v1.9.0-29
+mcr.microsoft.com/oss/v2/kubernetes/azure-cloud-node-manager:v1.36.8-3
+mcr.microsoft.com/oss/v2/kubernetes/coredns:v1.14.3-27
+otel/opentelemetry-collector-k8s:0.162.0@sha256:ed6862e1506e11c08a0ec4cc7e1395eb5cf10e3acf2c2ba3846edc1b6b3916d6
+postgres:14.20-alpine3.23@sha256:99b1da76e9e628f519f2aff2a2595128d7abb377ee1d7cc991ee45257efb05f0
+postgres:16-alpine@sha256:4e6e670bb069649261c9c18031f0aded7bb249a5b6664ddec29c013a89310d50
+prom/prometheus:v3.15.0@sha256:efd719c99d83b060d9daefdcf00360461adf279f45ef5391f8d111892118753e
+quay.io/jetstack/cert-manager-cainjector:v1.21.2
+quay.io/jetstack/cert-manager-controller:v1.21.2
+quay.io/jetstack/cert-manager-webhook:v1.21.2
+redis:7.4.7@sha256:976ab0f0939b78c06d802bcd3bea44c5142ea9a756a57b861e08819817f768c8
+ACR=acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+NODE=aks-pool110-23564750-vmss000000
+namespace/ulx3 created
+Warning: Validation failed for ValidatingAdmissionPolicy 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.vap' with binding 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.binding': Read-only root filesystem required in "ulnode". Failing container(s): c. Set securityContext.readOnlyRootFilesystem to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'privileged-containers-should-be-avoide-340c1aa047cbfe06.vap' with binding 'privileged-containers-should-be-avoide-340c1aa047cbfe06.binding': Privileged containers are not allowed in "ulnode". Failing container(s): c. Set securityContext.privileged to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.vap' with binding 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.binding': Container must run as non-root in "ulnode". Failing container(s): c. Set runAsUser to non-zero or runAsNonRoot to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'containers-sharing-sensitive-host-name-36757b1c2963e738.vap' with binding 'containers-sharing-sensitive-host-name-36757b1c2963e738.binding': Host namespace sharing is not allowed in "ulnode".
+Warning: Validation failed for ValidatingAdmissionPolicy 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.vap' with binding 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.binding': Required capability drops missing in "ulnode". Failing container(s): c. Must drop: ALL or ALL
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-cpu-and-memory-limits-should-f54349a103fc9619.vap' with binding 'container-cpu-and-memory-limits-should-f54349a103fc9619.binding': CPU limit exceeds maximum in "ulnode". Maximum allowed: 700m
+pod/ulnode created
+STATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE3 Pending {"waiting":{"reason":"ContainerCreating"}}
+STATE4 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+STATE5 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+STATE6 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NAME     READY   STATUS         RESTARTS   AGE   IP            NODE                              NOMINATED NODE   READINESS GATES
+ulnode   0/1     ErrImagePull   0          97s   10.51.0.222   aks-pool110-23564750-vmss000000   <none>           <none>
+Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+    Mounts:
+      /host from host (rw)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  host:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:  
+QoS Class:         Burstable
+Node-Selectors:    <none>
+Tolerations:       node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                   node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                   node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason   Age               From     Message
+  ----     ------   ----              ----     -------
+  Warning  Failed   33s               kubelet  Failed to pull image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b": rpc error: code = DeadlineExceeded desc = failed to pull and unpack image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b": failed to resolve image: failed to do request: Head "https://acrg42ustfdemokashif.azurecr.io/v2/tollgate-control-api/manifests/73cdfa9b": dial tcp 72.152.167.199:443: i/o timeout
+  Warning  Failed   33s               kubelet  Error: ErrImagePull
+  Normal   Pulling  3s (x2 over 63s)  kubelet  Pulling image "acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b"
