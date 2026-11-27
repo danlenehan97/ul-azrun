@@ -1,0 +1,22 @@
+USE acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/ulx0 created
+pod/ulnode created
+NODESTATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+NODESTATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+NODESTATE3 Pending {"waiting":{"reason":"ContainerCreating"}}
+NODESTATE4 Pending {"waiting":{"reason":"ContainerCreating"}}
+NODESTATE5 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE6 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE7 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE8 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE9 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE10 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE11 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+NODESTATE12 Pending {"waiting":{"message":"rpc error: code = DeadlineExceeded desc = failed to pull and unpack image \"acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b\": failed to resolve image: failed to do request: Head \"https://acrg42ustfdemokashif.azurecr.io/v2/wallet-billing/manifests/73cdfa9b\": dial tcp 72.152.167.199:443: i/o timeout","reason":"ErrImagePull"}}
+LOGS1 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS2 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS3 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS4 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS5 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+LOGS6 Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
+Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
