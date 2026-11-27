@@ -1,0 +1,34 @@
+DNS login=20.190.190.129 20.190.190.130 20.190.190.132 20.190.190.193  mgmt=4.150.241.10 
+USE billing-559f7df45-9vdlk acrg42ustfdemokashif.azurecr.io/wallet-billing:73cdfa9b aks-pool110-23564750-vmss000003
+namespace/wallet-billing unlabeled
+pod/ulwi4 created
+namespace/wallet-billing labeled
+WISTATE1 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE2 Pending {"waiting":{"reason":"ContainerCreating"}}
+WISTATE3 Running {"running":{"startedAt":"2026-11-27T17:04:46Z"}}
+WISTATE4 Running {"running":{"startedAt":"2026-11-27T17:04:46Z"}}
+WISTATE5 Succeeded {"terminated":{"containerID":"containerd://1469455ec99dabcbfeba4153a19ea318ff2b0508bf784ad651b4729af81c1af0","exitCode":0,"finishedAt":"2026-11-27T17:05:06Z","reason":"Completed","startedAt":"2026-11-27T17:04:46Z"}}
+LOGS1 TOOLS: /usr/bin/python3 /usr/bin/curl
+search wallet-billing.svc.cluster.local svc.cluster.local cluster.local ygq05czg1y5evc1xo5cznlw3we.bx.internal.cloudapp.net
+nameserver 10.0.0.10
+options ndots:5
+/
+TOOLS: /usr/bin/python3 /usr/bin/curl
+search wallet-billing.svc.cluster.local svc.cluster.local cluster.local ygq05czg1y5evc1xo5cznlw3we.bx.internal.cloudapp.net
+nameserver 10.0.0.10
+options ndots:5
+/bin/sh: 3: cannot create /etc/hosts: Permission denied
+/bin/sh: 3: cannot create /etc/hosts: Permission denied
+/bin/sh: 3: cannot create /etc/hosts: Permission denied
+/bin/sh: 3: cannot create /etc/hosts: Permission denied
+/bin/sh: 4: cannot create /etc/hosts: Permission denied
+# Kubernetes-managed hosts file.
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+fe00::0	ip6-mcastprefix
+fe00::1	ip6-allnodes
+fe00::2	ip6-allrouters
+10.51.0.173	ulwi4
+ENV 62974d97-13b6-40c9-8576-f1ab2905b6cf 4495d73a-bf6f-40e1-b551-0c775ab7182f /var/run/secrets/azure/tokens/azure-identity-token
+AUTHERR <urlopen error [Errno -3] Temporary failure in name resolution>
