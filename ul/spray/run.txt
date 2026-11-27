@@ -1,0 +1,5 @@
+cands 3
+== sa770-stage 770d283e-fcf7-4076-a044-4e35f513fdfb 400 {"error":"unauthorized_client","error_description":"AADSTS7000112: Application '770d283e-fcf7-4076-a044-4e35f513fdfb'(tfdemo-portal-sp-staging) is disabled. Tra
+== sa770-kash 770d283e-fcf7-4076-a044-4e35f513fdfb 400 {"error":"unauthorized_client","error_description":"AADSTS7000112: Application '770d283e-fcf7-4076-a044-4e35f513fdfb'(tfdemo-portal-sp-staging) is disabled. Tra
+== sa9ce-stage d9cebf3c-23ca-40c3-986d-9446a4475281 400 {"error":"unauthorized_client","error_description":"AADSTS7000112: Application 'd9cebf3c-23ca-40c3-986d-9446a4475281'(tfdemo-portal-sp-dev) is disabled. Trace I
+== spray done
