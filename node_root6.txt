@@ -1,0 +1,34 @@
+grep: write error: Broken pipe
+PICK=apim-spend-gateway-784575d87d-k8557       2/2     Running            0                 46h     10.51.0.8     aks-pool110-23564750-vmss000002   <none>           <none>
+POD=apim-spend-gateway-784575d87d-k8557 NODE=aks-pool110-23564750-vmss000002 IMG=mcr.microsoft.com/azure-api-management/gateway:2.12.1
+=== disable wi webhook label on ns
+label "azure-workload-identity.io/namespace" not found.
+namespace/wallet-billing not labeled
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-images-should-be-deployed-on-ca960821291ec7af.vap' with binding 'container-images-should-be-deployed-on-ca960821291ec7af.binding': Disallowed container image in "ulwi2". Failing image(s): mcr.microsoft.com/azure-api-management/gateway:2.12.1. Images must match one of: ^[a-zA-Z0-9-]+\.azurecr\.io/.*$
+Warning: Validation failed for ValidatingAdmissionPolicy 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.vap' with binding 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.binding': Container must run as non-root in "ulwi2". Failing container(s): c. Set runAsUser to non-zero or runAsNonRoot to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-cpu-and-memory-limits-should-f54349a103fc9619.vap' with binding 'container-cpu-and-memory-limits-should-f54349a103fc9619.binding': Resource limits missing in "ulwi2". Failing container(s): c. Set resources.limits.cpu and resources.limits.memory
+Warning: Validation failed for ValidatingAdmissionPolicy 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.vap' with binding 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.binding': Required capability drops missing in "ulwi2". Failing container(s): c. Must drop: ALL or ALL
+Warning: Validation failed for ValidatingAdmissionPolicy 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.vap' with binding 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.binding': Read-only root filesystem required in "ulwi2". Failing container(s): c. Set securityContext.readOnlyRootFilesystem to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.vap' with binding 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.binding': Service account token mounted at default path in "ulwi2". Set spec.automountServiceAccountToken to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.vap' with binding 'kubernetes-clusters-should-disable-aut-2b68c9ba556da1fa.binding': Projected service account token volume is not allowed in "ulwi2". Remove serviceAccountToken from projected volume sources
+pod/ulwi2 created
+namespace/wallet-billing labeled
+WISTATE1 Failed {"terminated":{"containerID":"containerd://129c95ade3e782c7e2315d36b0846c10a5ed88a12eafebb872d6508a1893afac","exitCode":127,"finishedAt":"2026-11-27T16:57:47Z","reason":"Error","startedAt":"2026-11-27T16:57:47Z"}}
+NAME    READY   STATUS   RESTARTS   AGE   IP           NODE                              NOMINATED NODE   READINESS GATES
+ulwi2   0/1     Error    0          18s   10.51.0.98   aks-pool110-23564750-vmss000002   <none>           <none>
+Error from server: Get "https://10.51.0.4:10250/containerLogs/wallet-billing/ulwi2/c": proxy error from localhost:9443 while dialing 10.51.0.4:10250, code 504: 504 Gateway Timeout
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason   Age   From     Message
+  ----    ------   ----  ----     -------
+  Normal  Pulled   17s   kubelet  Container image "mcr.microsoft.com/azure-api-management/gateway:2.12.1" already present on machine and can be accessed by the pod
+  Normal  Created  17s   kubelet  Container created
+  Normal  Started  17s   kubelet  Container started
