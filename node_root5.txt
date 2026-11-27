@@ -1,0 +1,29 @@
+=== WI POD (control-sync-apply)
+Error from server (InternalError): error when creating "/tmp/wi.yaml": Internal error occurred: failed calling webhook "mutation.azure-workload-identity.io": failed to call webhook: Post "https://azure-wi-webhook-webhook-service.kube-system.svc:443/mutate-v1-pod?timeout=10s": proxy error from localhost:9443 while dialing 10.51.0.82:9443, code 504: 504 Gateway Timeout
+WISTATE1 Error from server (NotFound): pods "ulwi" not found
+WISTATE2 Error from server (NotFound): pods "ulwi" not found
+WISTATE3 Error from server (NotFound): pods "ulwi" not found
+WISTATE4 Error from server (NotFound): pods "ulwi" not found
+WISTATE5 Error from server (NotFound): pods "ulwi" not found
+WISTATE6 Error from server (NotFound): pods "ulwi" not found
+WISTATE7 Error from server (NotFound): pods "ulwi" not found
+WISTATE8 Error from server (NotFound): pods "ulwi" not found
+error: error from server (NotFound): pods "ulwi" not found in namespace "wallet-billing"
+=== NODE POD
+namespace/ulx5 created
+Warning: Validation failed for ValidatingAdmissionPolicy 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.vap' with binding 'running-containers-as-root-user-should-0dc6dbe5cfc49bd4.binding': Container must run as non-root in "ulnode". Failing container(s): c. Set runAsUser to non-zero or runAsNonRoot to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.vap' with binding 'immutable-read-only-root-filesystem-sh-6c3f0d0b25490e42.binding': Read-only root filesystem required in "ulnode". Failing container(s): c. Set securityContext.readOnlyRootFilesystem to true
+Warning: Validation failed for ValidatingAdmissionPolicy 'privileged-containers-should-be-avoide-340c1aa047cbfe06.vap' with binding 'privileged-containers-should-be-avoide-340c1aa047cbfe06.binding': Privileged containers are not allowed in "ulnode". Failing container(s): c. Set securityContext.privileged to false
+Warning: Validation failed for ValidatingAdmissionPolicy 'containers-sharing-sensitive-host-name-36757b1c2963e738.vap' with binding 'containers-sharing-sensitive-host-name-36757b1c2963e738.binding': Host namespace sharing is not allowed in "ulnode".
+Warning: Validation failed for ValidatingAdmissionPolicy 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.vap' with binding 'least-privileged-linux-capabilities-sh-cf6d4edc2af45441.binding': Required capability drops missing in "ulnode". Failing container(s): c. Must drop: ALL or ALL
+Warning: Validation failed for ValidatingAdmissionPolicy 'container-cpu-and-memory-limits-should-f54349a103fc9619.vap' with binding 'container-cpu-and-memory-limits-should-f54349a103fc9619.binding': Resource limits missing in "ulnode". Failing container(s): c. Set resources.limits.cpu and resources.limits.memory
+pod/ulnode created
+NODESTATE1 Pending
+NODESTATE2 Pending
+NODESTATE3 Pending
+NODESTATE4 Pending
+NODESTATE5 Pending
+NODESTATE6 Pending
+NODESTATE7 Pending
+NODESTATE8 Pending
+Error from server (BadRequest): container "c" in pod "ulnode" is waiting to start: image can't be pulled
