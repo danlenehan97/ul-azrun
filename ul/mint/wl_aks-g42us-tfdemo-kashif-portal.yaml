@@ -1,0 +1,589 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "47"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"operator-control-api","namespace":"wallet-billing"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"operator-control-api"}},"template":{"metadata":{"labels":{"app":"operator-control-api"}},"spec":{"automountServiceAccountToken":false,"containers":[{"command":["python","-m","control_api.operator_app"],"env":[{"name":"BILLING_CURRENCY","valueFrom":{"configMapKeyRef":{"key":"BILLING_CURRENCY","name":"billing-config-chbtkb6cmf"}}},{"name":"CONTROL_EMAIL_API_TOKEN_FILE","value":"/email-runtime/api_token"},{"name":"DRAIN_MONITOR_URL","value":"http://drain-monitor-state:18236"},{"name":"CONTROL_SYNC_DATABASE_URL","valueFrom":{"secretKeyRef":{"key":"CONTROL_SYNC_DATABASE_URL","name":"control-sync-relay-db"}}},{"name":"CONTROL_SYNC_SERVICEBUS_INTERIM_KEY_MODE","value":"1"},{"name":"CONTROL_SYNC_SERVICEBUS_CONNECTION_FILE","value":"/control-sync-servicebus/connection-string"},{"name":"OTEL_EXPORTER_OTLP_ENDPOINT","value":"http://otel-collector.observability:4318"},{"name":"OTEL_SEMCONV_STABILITY_OPT_IN","value":"http"}],"envFrom":[{"secretRef":{"name":"operator-control-api-runtime"}},{"configMapRef":{"name":"cluster-config"}}],"image":"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b","imagePullPolicy":"IfNotPresent","livenessProbe":{"httpGet":{"path":"/health/live","port":8000},"periodSeconds":10,"timeoutSeconds":3},"name":"operator-control-api","ports":[{"containerPort":8000}],"readinessProbe":{"httpGet":{"path":"/health/ready","port":8000},"periodSeconds":5,"timeoutSeconds":6},"resources":{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"startupProbe":{"failureThreshold":30,"httpGet":{"path":"/health/ready","port":8000},"periodSeconds":5},"volumeMounts":[{"mountPath":"/email-runtime","name":"email-runtime","readOnly":true},{"mountPath":"/key-region-map-runtime","name":"key-region-map-runtime","readOnly":true},{"mountPath":"/control-sync-servicebus","name":"control-sync-servicebus","readOnly":true}]}],"securityContext":{"fsGroup":10001,"runAsNonRoot":true,"runAsUser":10001},"volumes":[{"name":"email-runtime","secret":{"defaultMode":288,"optional":true,"secretName":"email-runtime"}},{"name":"key-region-map-runtime","secret":{"defaultMode":288,"optional":true,"secretName":"key-region-map-runtime"}},{"name":"control-sync-servicebus","secret":{"defaultMode":288,"secretName":"control-sync-servicebus"}}]}}}}
+    creationTimestamp: "2026-11-03T23:15:26Z"
+    generation: 47
+    name: operator-control-api
+    namespace: wallet-billing
+    resourceVersion: "11105205"
+    uid: 26823947-6a5f-43da-9c7e-b1c186f89f69
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: operator-control-api
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-11-25T14:49:37-06:00"
+        labels:
+          app: operator-control-api
+      spec:
+        automountServiceAccountToken: false
+        containers:
+        - command:
+          - python
+          - -m
+          - control_api.operator_app
+          env:
+          - name: BILLING_CURRENCY
+            valueFrom:
+              configMapKeyRef:
+                key: BILLING_CURRENCY
+                name: billing-config-chbtkb6cmf
+          - name: CONTROL_EMAIL_API_TOKEN_FILE
+            value: /email-runtime/api_token
+          - name: DRAIN_MONITOR_URL
+            value: http://drain-monitor-state:18236
+          - name: CONTROL_SYNC_DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                key: CONTROL_SYNC_DATABASE_URL
+                name: control-sync-relay-db
+          - name: CONTROL_SYNC_SERVICEBUS_INTERIM_KEY_MODE
+            value: "1"
+          - name: CONTROL_SYNC_SERVICEBUS_CONNECTION_FILE
+            value: /control-sync-servicebus/connection-string
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: http://otel-collector.observability:4318
+          - name: OTEL_SEMCONV_STABILITY_OPT_IN
+            value: http
+          envFrom:
+          - secretRef:
+              name: operator-control-api-runtime
+          - configMapRef:
+              name: cluster-config
+          image: acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/live
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          name: operator-control-api
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/ready
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 6
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /health/ready
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /email-runtime
+            name: email-runtime
+            readOnly: true
+          - mountPath: /key-region-map-runtime
+            name: key-region-map-runtime
+            readOnly: true
+          - mountPath: /control-sync-servicebus
+            name: control-sync-servicebus
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 10001
+          runAsNonRoot: true
+          runAsUser: 10001
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: email-runtime
+          secret:
+            defaultMode: 288
+            optional: true
+            secretName: email-runtime
+        - name: key-region-map-runtime
+          secret:
+            defaultMode: 288
+            optional: true
+            secretName: key-region-map-runtime
+        - name: control-sync-servicebus
+          secret:
+            defaultMode: 288
+            secretName: control-sync-servicebus
+  status:
+    conditions:
+    - lastTransitionTime: "2026-11-04T17:47:07Z"
+      lastUpdateTime: "2026-11-25T20:49:43Z"
+      message: ReplicaSet "operator-control-api-b8d7589f4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-11-27T07:21:13Z"
+      lastUpdateTime: "2026-11-27T07:21:13Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    observedGeneration: 47
+    replicas: 1
+    terminatingReplicas: 0
+    unavailableReplicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "35"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"portal-ui","namespace":"wallet-billing"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"portal-ui"}},"template":{"metadata":{"labels":{"app":"portal-ui"}},"spec":{"automountServiceAccountToken":false,"containers":[{"command":["python","-m","control_api.ui_app"],"env":[{"name":"CONTROL_STRIPE_MODE","valueFrom":{"secretKeyRef":{"key":"CONTROL_STRIPE_MODE","name":"user-control-api-runtime","optional":true}}},{"name":"CONTROL_INFERENCE_BASE_URL","valueFrom":{"secretKeyRef":{"key":"CONTROL_INFERENCE_BASE_URL","name":"user-control-api-runtime","optional":true}}},{"name":"CONTROL_FORWARDED_ALLOW_IPS","value":"10.50.0.0/20"}],"image":"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b","imagePullPolicy":"IfNotPresent","livenessProbe":{"httpGet":{"path":"/health/live","port":8000},"periodSeconds":10,"timeoutSeconds":3},"name":"portal-ui","ports":[{"containerPort":8000}],"readinessProbe":{"httpGet":{"path":"/health/ready","port":8000},"periodSeconds":5,"timeoutSeconds":3},"resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}}],"securityContext":{"fsGroup":10001,"runAsNonRoot":true,"runAsUser":10001}}}}}
+    creationTimestamp: "2026-11-06T03:44:59Z"
+    generation: 35
+    name: portal-ui
+    namespace: wallet-billing
+    resourceVersion: "10469041"
+    uid: fe33765c-5708-488c-ac8e-756974680361
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: portal-ui
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-11-25T14:49:16-06:00"
+        labels:
+          app: portal-ui
+      spec:
+        automountServiceAccountToken: false
+        containers:
+        - command:
+          - python
+          - -m
+          - control_api.ui_app
+          env:
+          - name: CONTROL_STRIPE_MODE
+            valueFrom:
+              secretKeyRef:
+                key: CONTROL_STRIPE_MODE
+                name: user-control-api-runtime
+                optional: true
+          - name: CONTROL_INFERENCE_BASE_URL
+            valueFrom:
+              secretKeyRef:
+                key: CONTROL_INFERENCE_BASE_URL
+                name: user-control-api-runtime
+                optional: true
+          - name: CONTROL_FORWARDED_ALLOW_IPS
+            value: 10.50.0.0/20
+          image: acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/live
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          name: portal-ui
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/ready
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 10001
+          runAsNonRoot: true
+          runAsUser: 10001
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 2
+    conditions:
+    - lastTransitionTime: "2026-11-06T03:45:09Z"
+      lastUpdateTime: "2026-11-06T03:45:09Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-11-06T03:44:59Z"
+      lastUpdateTime: "2026-11-25T20:49:29Z"
+      message: ReplicaSet "portal-ui-78446f6f65" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 35
+    readyReplicas: 2
+    replicas: 2
+    terminatingReplicas: 0
+    updatedReplicas: 2
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "47"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"user-control-api","namespace":"wallet-billing"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"user-control-api"}},"template":{"metadata":{"labels":{"app":"user-control-api"}},"spec":{"automountServiceAccountToken":false,"containers":[{"command":["python","-m","control_api.user_app"],"env":[{"name":"BILLING_CURRENCY","valueFrom":{"configMapKeyRef":{"key":"BILLING_CURRENCY","name":"billing-config-chbtkb6cmf"}}},{"name":"CONTROL_STRIPE_SECRET_KEY_FILE","value":"/stripe-runtime/secret_key"},{"name":"CONTROL_EMAIL_API_TOKEN_FILE","value":"/email-runtime/api_token"},{"name":"CONTROL_FORWARDED_ALLOW_IPS","value":"10.50.0.0/20"},{"name":"CONTROL_SYNC_ENQUEUE","value":"1"},{"name":"CONTROL_PORTAL_CALLS_CONNECTION_FILE","value":"/portal-live-reads/calls-connection-string"},{"name":"CONTROL_PORTAL_REPLIES_CONNECTION_FILE","value":"/portal-live-reads/replies-connection-string"},{"name":"CONTROL_PORTAL_CALLS_KEYS_DIR","value":"/portal-calls-keys"},{"name":"OTEL_EXPORTER_OTLP_ENDPOINT","value":"http://otel-collector.observability:4318"},{"name":"OTEL_SEMCONV_STABILITY_OPT_IN","value":"http"}],"envFrom":[{"secretRef":{"name":"user-control-api-runtime"}},{"configMapRef":{"name":"cluster-config"}}],"image":"acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b","imagePullPolicy":"IfNotPresent","livenessProbe":{"httpGet":{"path":"/health/live","port":8000},"periodSeconds":10,"timeoutSeconds":3},"name":"user-control-api","ports":[{"containerPort":8000}],"readinessProbe":{"httpGet":{"path":"/health/ready","port":8000},"periodSeconds":5,"timeoutSeconds":6},"resources":{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"startupProbe":{"failureThreshold":30,"httpGet":{"path":"/health/ready","port":8000},"periodSeconds":5},"volumeMounts":[{"mountPath":"/stripe-runtime","name":"stripe-runtime","readOnly":true},{"mountPath":"/email-runtime","name":"email-runtime","readOnly":true},{"mountPath":"/key-region-map-runtime","name":"key-region-map-runtime","readOnly":true},{"mountPath":"/portal-live-reads","name":"portal-live-reads","readOnly":true},{"mountPath":"/portal-calls-keys","name":"portal-calls-keys","readOnly":true}]}],"securityContext":{"fsGroup":10001,"runAsNonRoot":true,"runAsUser":10001},"volumes":[{"name":"stripe-runtime","secret":{"defaultMode":288,"optional":true,"secretName":"stripe-runtime"}},{"name":"email-runtime","secret":{"defaultMode":288,"optional":true,"secretName":"email-runtime"}},{"name":"key-region-map-runtime","secret":{"defaultMode":288,"optional":true,"secretName":"key-region-map-runtime"}},{"name":"portal-live-reads","secret":{"defaultMode":288,"secretName":"portal-live-reads"}},{"name":"portal-calls-keys","secret":{"defaultMode":288,"secretName":"portal-calls-keys"}}]}}}}
+    creationTimestamp: "2026-11-03T23:15:26Z"
+    generation: 47
+    name: user-control-api
+    namespace: wallet-billing
+    resourceVersion: "11114408"
+    uid: 85150515-6d9c-4a7c-bc17-5e9832fdae4f
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: user-control-api
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-11-25T14:49:29-06:00"
+        labels:
+          app: user-control-api
+      spec:
+        automountServiceAccountToken: false
+        containers:
+        - command:
+          - python
+          - -m
+          - control_api.user_app
+          env:
+          - name: BILLING_CURRENCY
+            valueFrom:
+              configMapKeyRef:
+                key: BILLING_CURRENCY
+                name: billing-config-chbtkb6cmf
+          - name: CONTROL_STRIPE_SECRET_KEY_FILE
+            value: /stripe-runtime/secret_key
+          - name: CONTROL_EMAIL_API_TOKEN_FILE
+            value: /email-runtime/api_token
+          - name: CONTROL_FORWARDED_ALLOW_IPS
+            value: 10.50.0.0/20
+          - name: CONTROL_SYNC_ENQUEUE
+            value: "1"
+          - name: CONTROL_PORTAL_CALLS_CONNECTION_FILE
+            value: /portal-live-reads/calls-connection-string
+          - name: CONTROL_PORTAL_REPLIES_CONNECTION_FILE
+            value: /portal-live-reads/replies-connection-string
+          - name: CONTROL_PORTAL_CALLS_KEYS_DIR
+            value: /portal-calls-keys
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: http://otel-collector.observability:4318
+          - name: OTEL_SEMCONV_STABILITY_OPT_IN
+            value: http
+          envFrom:
+          - secretRef:
+              name: user-control-api-runtime
+          - configMapRef:
+              name: cluster-config
+          image: acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/live
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          name: user-control-api
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/ready
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 6
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /health/ready
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /stripe-runtime
+            name: stripe-runtime
+            readOnly: true
+          - mountPath: /email-runtime
+            name: email-runtime
+            readOnly: true
+          - mountPath: /key-region-map-runtime
+            name: key-region-map-runtime
+            readOnly: true
+          - mountPath: /portal-live-reads
+            name: portal-live-reads
+            readOnly: true
+          - mountPath: /portal-calls-keys
+            name: portal-calls-keys
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 10001
+          runAsNonRoot: true
+          runAsUser: 10001
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: stripe-runtime
+          secret:
+            defaultMode: 288
+            optional: true
+            secretName: stripe-runtime
+        - name: email-runtime
+          secret:
+            defaultMode: 288
+            optional: true
+            secretName: email-runtime
+        - name: key-region-map-runtime
+          secret:
+            defaultMode: 288
+            optional: true
+            secretName: key-region-map-runtime
+        - name: portal-live-reads
+          secret:
+            defaultMode: 288
+            secretName: portal-live-reads
+        - name: portal-calls-keys
+          secret:
+            defaultMode: 288
+            secretName: portal-calls-keys
+  status:
+    conditions:
+    - lastTransitionTime: "2026-11-03T23:15:26Z"
+      lastUpdateTime: "2026-11-25T20:49:36Z"
+      message: ReplicaSet "user-control-api-669f494ddd" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-11-27T07:50:56Z"
+      lastUpdateTime: "2026-11-27T07:50:56Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    observedGeneration: 47
+    replicas: 1
+    terminatingReplicas: 0
+    unavailableReplicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"postgres","namespace":"wallet-billing"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"postgres"}},"serviceName":"postgres","template":{"metadata":{"labels":{"app":"postgres"}},"spec":{"automountServiceAccountToken":false,"containers":[{"env":[{"name":"POSTGRES_DB","value":"billing"},{"name":"POSTGRES_PASSWORD","valueFrom":{"secretKeyRef":{"key":"POSTGRES_PASSWORD","name":"billing-secrets"}}},{"name":"PGDATA","value":"/var/lib/postgresql/data/pgdata"}],"image":"postgres:16-alpine@sha256:4e6e670bb069649261c9c18031f0aded7bb249a5b6664ddec29c013a89310d50","livenessProbe":{"exec":{"command":["pg_isready","-h","127.0.0.1","-U","postgres","-d","billing"]},"initialDelaySeconds":30,"periodSeconds":10},"name":"postgres","ports":[{"containerPort":5432}],"readinessProbe":{"exec":{"command":["pg_isready","-h","127.0.0.1","-U","postgres","-d","billing"]},"periodSeconds":5},"resources":{"limits":{"cpu":"2","memory":"1Gi"},"requests":{"cpu":"250m","memory":"256Mi"}},"volumeMounts":[{"mountPath":"/var/lib/postgresql/data","name":"data"},{"mountPath":"/dev/shm","name":"dshm"}]}],"volumes":[{"name":"data","persistentVolumeClaim":{"claimName":"postgres-data"}},{"emptyDir":{"medium":"Memory","sizeLimit":"1Gi"},"name":"dshm"}]}}}}
+    creationTimestamp: "2026-11-02T07:54:20Z"
+    generation: 1
+    name: postgres
+    namespace: wallet-billing
+    resourceVersion: "64783"
+    uid: c6e90c23-3578-4326-a872-edcea0db28fa
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: postgres
+    serviceName: postgres
+    template:
+      metadata:
+        labels:
+          app: postgres
+      spec:
+        automountServiceAccountToken: false
+        containers:
+        - env:
+          - name: POSTGRES_DB
+            value: billing
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: billing-secrets
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+          image: postgres:16-alpine@sha256:4e6e670bb069649261c9c18031f0aded7bb249a5b6664ddec29c013a89310d50
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+              - pg_isready
+              - -h
+              - 127.0.0.1
+              - -U
+              - postgres
+              - -d
+              - billing
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: postgres
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - pg_isready
+              - -h
+              - 127.0.0.1
+              - -U
+              - postgres
+              - -d
+              - billing
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: "2"
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: data
+          - mountPath: /dev/shm
+            name: dshm
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data
+        - emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
+          name: dshm
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: postgres-7f5784c575
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: postgres-7f5784c575
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

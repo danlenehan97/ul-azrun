@@ -1,0 +1,8 @@
+cid c436a85b-f27b-4701-8bee-78b0c2a378cf alen 1395
+AAD v2.0 {"token_type":"Bearer","expires_in":86399,"ext_expires_in":86399,"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCIsImtpZCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy
+TOK oid 1bed75f1-feae-4a2a-ade5-2cbdf094b457 appid c436a85b-f27b-4701-8bee-78b0c2a378cf mirid /subscriptions/1f99347e-36c8-4512-ad30-f638a8d8489f/resourcegroups/rg-g42us-tfdemo-staging/providers/Microsoft.ManagedIdentity/userAssignedI
+SUBS {"value":[{"id":"/subscriptions/1f99347e-36c8-4512-ad30-f638a8d8489f","authorizationSource":"RoleBased","managedByTenants":[],"subscriptionId":"1f99347e-36c8-4512-ad30-f638a8d8489f","tenantId":"62974d97-13b6-40c9-8576-f1ab2905b6cf","displayName":"G42-AMERICAS-DEV","state":"Enabled","subscriptionPolicies":{"locationPlacementId":"Public_2014-09-01","quotaId":"EnterpriseAgreement_2014-09-01","spendingLimit":"Off"}}],"count":{"type":"Total","value":1}}
+PROBE Microsoft.Authorization/permissions?api-version=2022-04-01 {"value":[]}
+PROBE Microsoft.Compute/virtualMachines?api-version=2024-07-01 {"value":[]}
+PROBE Microsoft.ManagedIdentity/userAssignedIdentities?api-version {"value":[]}
+PROBE Microsoft.Compute/locations/eastus/usages?api-version=2024-0 {"value":[{"limit":350,"unit":"Count","currentValue":24,"name":{"value":"standardDADSv5Family","localizedValue":"Standard DADSv5 Family vCPUs"}},{"limit":500,"unit":"Count","currentValue":448,"name":{"value":"standardDASv5Family","localizedValue":"Standard DASv5 Family vCPUs"}},{"limit":350,"unit":"
