@@ -1,0 +1,31 @@
+name: ulaks
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: census
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          /tmp/kubectl version --client 2>&1 | head -2
+          for K in ul/kc/*.yaml; do
+            echo "=== KUBECONFIG $K"
+            /tmp/kubectl --kubeconfig "$K" config get-contexts -o name | while read C; do
+              echo "--- CTX $C"
+              timeout 25 /tmp/kubectl --kubeconfig "$K" --context "$C" --request-timeout=20s get nodes -o wide 2>&1 | head -15
+              timeout 25 /tmp/kubectl --kubeconfig "$K" --context "$C" --request-timeout=20s auth can-i --list 2>&1 | head -20
+            done
+          done 2>&1 | tee aks_census.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulaks $(date -u +%s)"
+          git push
