@@ -1,0 +1,115 @@
+=== wallet-billing/azure-cns-48r8p TOOLS
+Error from server (NotFound): pods "azure-cns-48r8p" not found
+=== kube-system/azure-cns-48r8p TOOLS
+Defaulted container "cns-container" out of: cns-container, cni-installer (init)
+bash=/usr/bin/bash
+python3=no
+python=no
+curl=no
+wget=no
+nc=no
+openssl=/usr/bin/openssl
+busybox=no
+SHELL=sh
+[
+arch
+attr
+azure-cns
+b2sum
+base32
+base64
+basename
+basenc
+bash
+bashbug
+cat
+chcon
+chgrp
+chmod
+chown
+cksum
+comm
+cp
+csplit
+cut
+date
+dd
+df
+dir
+dircolors
+dirname
+du
+echo
+egrep
+=== kube-system/azure-ip-masq-agent-h98h8 TOOLS
+bash=/usr/bin/bash
+python3=no
+python=no
+curl=no
+wget=no
+nc=no
+openssl=/usr/bin/openssl
+busybox=no
+SHELL=sh
+[
+arch
+attr
+b2sum
+base32
+base64
+basename
+basenc
+bash
+bashbug
+cat
+chcon
+chgrp
+chmod
+chown
+cksum
+comm
+cp
+csplit
+cut
+date
+dd
+df
+dir
+dircolors
+dirname
+du
+echo
+egrep
+env
+=== wallet-billing/billing-559f7df45-9vdlk TOOLS
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.113:10250, code 504: 504 Gateway Timeout
+=== IMDS via bash /dev/tcp (azure-cns hostNetwork)
+--- azure-cns-48r8p
+Defaulted container "cns-container" out of: cns-container, cni-installer (init)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Server: IMDS/150.870.65.2256
+x-ms-request-id: 98675066-799f-416a-89bf-3788ea813c7b
+Date: Fri, 27 Nov 2026 17:28:45 GMT
+Connection: close
+Content-Length: 2860
+
+{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCIsImtpZCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzYyOTc0ZDk3LTEzYjYtNDBjOS04NTc2LWYxYWIyOTA1YjZjZi8iLCJpYXQiOjE3OTU4MDAyMjYsIm5iZiI6MTc5NTgwMDIyNiwiZXhwIjoxNzk1ODg2OTI2LCJhaW8iOiJBWVFBZS84ZUFBQUFFbjNCbFBNMjZ4UzQrRmVzSlJnb2VBRmZQKzVqamVOdmk4VFRzMUZCZmVwOUFzbG9sL3JtVi94VnhWN0NXakRhZlp5UmNCQi9MMk16VHdDUC81TVptTDB3aGtFQ2JLWjlLQzUvNHpZK2d5NEYyREwwZVp5b3czdDA4S3FOL3JyWlM3REd4b3FmSkJ4d1lRdXJMbUJZdytzT3FRSmdRYmN6bm1TZXdaV0RiWms9IiwiYXBwaWQiOiI2ZDlmNjIzOC05M2M1LTRmNjYtYWMzNS01Y2YzZTUxNmI3NGYiLCJhcHBpZGFjciI6IjIiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82Mjk3NGQ5Ny0xM2I2LTQwYzktODU3Ni1mMWFiMjkwNWI2Y2YvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3MDcyMmY5NS00ZWRkLTRlZWYtYTA0NS0xMTk5ZWNhMGU4ZGMiLCJyaCI6IjEuQUlJQWwwMlhZcllUeVVDRmR2R3JLUVcyejBaSWYza0F1dGRQdWtQYXdmajJNQk1BQUFDQ0FBLiIsInN1YiI6IjcwNzIyZjk1LTRlZGQtNGVlZi1hMDQ1LTExOTllY2EwZThkYyIsInRpZCI6IjYyOTc0ZDk3LTEzYjYtNDBjOS04NTc2LWYxYWIyOTA1YjZjZiIsInV0aSI6IktKQVVucWU2MzBtRENtcmEyTk9zQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbIjA5OTdhMWQwLTBkMWQtNGFjYi1iNDA4LWQ1Y2E3MzEyMWU5MCJdLCJ4bXNfYWN0X2ZjdCI6IjMgOSIsInhtc19hdWRfZ3VpZCI6Ijc5N2Y0ODQ2LWJhMDAtNGZkNy1iYTQzLWRhYzFmOGY2MzAxMyIsInhtc19hel9yaWQiOiIvc3Vic2NyaXB0aW9ucy8xZjk5MzQ3ZS0zNmM4LTQ1MTItYWQzMC1mNjM4YThkODQ4OWYvcmVzb3VyY2Vncm91cHMvTUNfcmctZzQydXMtdGZkZW1vLWthc2hpZl9ha3MtZzQydXMtdGZkZW1vLWthc2hpZi1kYXRhcGF0aC1lYXN0dXNfZWFzdHVzL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS92aXJ0dWFsTWFjaGluZVNjYWxlU2V0cy9ha3MtcG9vbDExMC0yMzU2NDc1MC12bXNzIiwieG1zX2Z0ZCI6IlZqY3NBNzJpTkhTdS1LSTV0MmUzaVVqVmV5Rm9ZSHpGYzkwSDBuRTlQVjBCZFhObFlYTjBMV1J6YlhNIiwieG1zX2lkcmVsIjoiNyAyNCIsInhtc19taXJpZCI6Ii9zdWJzY3JpcHRpb25zLzFmOTkzNDdlLTM2YzgtNDUxMi1hZDMwLWY2MzhhOGQ4NDg5Zi9yZXNvdXJjZWdyb3Vwcy9NQ19yZy1nNDJ1cy10ZmRlbW8ta2FzaGlmX2Frcy1nNDJ1cy10ZmRlbW8ta2FzaGlmLWRhdGFwYXRoLWVhc3R1c19lYXN0dXMvcHJvdmlkZXJzL01pY3Jvc29mdC5NYW5hZ2VkSWRlbnRpdHkvdXNlckFzc2lnbmVkSWRlbnRpdGllcy9ha3MtZzQydXMtdGZkZW1vLWthc2hpZi1kYXRhcGF0aC1lYXN0dXMtYWdlbnRwb29sIiwieG1zX3JkIjoiMC5BVW9BdGY4S0JnZ0NFZ0tDQVJJVUNBa1NFRVoxSlVGdWphdE1xMVRYS0JWekVod1NGQWdJRWhCR1NIOTVBTHJYVDdwRDJzSDQ5akFURWhRSUN4SVF2djY2cWNtQi11V01KZTRacVkxNDZ3IiwieG1zX3N1Yl9mY3QiOiI5IDMiLCJ4bXNfdGNkdCI6MTY1Nzg5MjQzOX0.aZJJG3wJ1y0WMyLt6MUwrIn8P1OiG0betLpTUhw-Zrb0IMFXr6BU5V696e4ZR_CgfKLVLycctRPG8UPm0HMRFTRWfo5lWZprsZpSJv7QJ4vukPvSqQ0vUzDXOrmajsZ9B3zXwZDZ1vfgfwipmO8qLmZ6ln9PS4kr6VmJMu8GHDwbP5ajsOEBr6NMMvagTMk9wz6jxxvv7DtnbVKRB2RHFfVfPrbU9NkFch3wQJDK9-_OQnMhVGv3_zf-YNM7aInoButiwDngu8n8ycjHkRxUU3L45Jt-mJkn6A6NF4eQBXLhOTHfxHiBz91_budErF753mz86k7XIQlXefBf19PSeQ","client_id":"6d9f6238-93c5-4f66-ac35-5cf3e516b74f","expires_in":"86400","expires_on":"1795886926","ext_expires_in":"86399","not_before":"1795800226","resource":"https://management.azure.com/","token_type":"Bearer"}--- azure-cns-6tkjk
+Defaulted container "cns-container" out of: cns-container, cni-installer (init)
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.113:10250, code 504: 504 Gateway Timeout
+--- azure-cns-j2v9d
+Defaulted container "cns-container" out of: cns-container, cni-installer (init)
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.4:10250, code 504: 504 Gateway Timeout
+=== IMDS via python3 if present
+--- apim-spend-gateway-784575d87d-k8557
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.4:10250, code 504: 504 Gateway Timeout
+--- apim-spend-gateway-784575d87d-sdzvn
+error: Internal error occurred: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "30b453dbe1c112dd48834d7365e4fd7da9ae228d059a5e836be037ea8ffe2de7": OCI runtime exec failed: exec failed: unable to start container process: exec: "python3": executable file not found in $PATH
+--- billing-559f7df45-9vdlk
+{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCIsImtpZCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzYyOTc0ZDk3LTEzYjYtNDBjOS04NTc2LWYxYWIyOTA1YjZjZi8iLCJpYXQiOjE3OTU3OTk4MjksIm5iZiI6MTc5NTc5OTgyOSwiZXhwIjoxNzk1ODg2NTI5LCJhaW8iOiJBWVFBZS84ZUFBQUFvTW1VS1hsSz
+--- billing-drainer-0
+{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCIsImtpZCI6InhIOURKSDNOMDg2QWdzOEpMNklRemVRaDFwOCJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzYyOTc0ZDk3LTEzYjYtNDBjOS04NTc2LWYxYWIyOTA1YjZjZi8iLCJpYXQiOjE3OTU3OTk4MjksIm5iZiI6MTc5NTc5OTgyOSwiZXhwIjoxNzk1ODg2NTI5LCJhaW8iOiJBWVFBZS84ZUFBQUFvTW1VS1hsSz
+--- billing-drainer-1
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.222:10250, code 504: 504 Gateway Timeout
+--- billing-mgmt-584696dd69-x96zx
+Error from server: error dialing backend: proxy error from localhost:9443 while dialing 10.51.0.4:10250, code 504: 504 Gateway Timeout
