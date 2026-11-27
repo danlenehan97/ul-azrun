@@ -1,0 +1,670 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  automountServiceAccountToken: true
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T07:55:38Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.21.2
+    name: cert-manager
+    namespace: cert-manager
+    resourceVersion: "65227"
+    uid: 030d8371-9923-45e0-9b8b-a6a500802859
+- apiVersion: v1
+  automountServiceAccountToken: true
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T07:55:38Z"
+    labels:
+      app: cainjector
+      app.kubernetes.io/component: cainjector
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cainjector
+      app.kubernetes.io/version: v1.21.2
+    name: cert-manager-cainjector
+    namespace: cert-manager
+    resourceVersion: "65225"
+    uid: 65d7313f-da57-4ed8-980a-d849a4e724b9
+- apiVersion: v1
+  automountServiceAccountToken: true
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T07:55:38Z"
+    labels:
+      app: webhook
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: webhook
+      app.kubernetes.io/version: v1.21.2
+    name: cert-manager-webhook
+    namespace: cert-manager
+    resourceVersion: "65229"
+    uid: 1ebfdf72-e4ae-4ccc-983f-687ab8f9eea4
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T07:55:36Z"
+    name: default
+    namespace: cert-manager
+    resourceVersion: "65196"
+    uid: cc0913ad-d2f4-4b2b-ac13-8145d03f74ab
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:07Z"
+    name: default
+    namespace: default
+    resourceVersion: "580"
+    uid: 5868ecc4-f941-4cc3-a58f-e9b2116176c5
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-27T16:52:49Z"
+    name: ul-harvest
+    namespace: default
+    resourceVersion: "11280599"
+    uid: fe3d4a97-04f2-4cae-9472-705960c71e1e
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:07Z"
+    name: default
+    namespace: kube-node-lease
+    resourceVersion: "581"
+    uid: 719dfb20-dee5-42ce-9d68-cb34abbff62c
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:07Z"
+    name: default
+    namespace: kube-public
+    resourceVersion: "582"
+    uid: 4f812acd-f471-4d69-a289-32d3d60e651e
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: attachdetach-controller
+    namespace: kube-system
+    resourceVersion: "553"
+    uid: a280d069-c923-46f7-923f-793caccf2c74
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:22:58Z"
+    name: azure-cns
+    namespace: kube-system
+    resourceVersion: "242"
+    uid: 546295d7-eac7-4c9d-8e1d-e7dd929ce9f5
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: aks-managed-workload-identity
+      meta.helm.sh/release-namespace: kube-system
+    creationTimestamp: "2026-11-02T04:23:03Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      azure-workload-identity.io/system: "true"
+      helm.toolkit.fluxcd.io/name: workload-identity-adapter-helmrelease
+      helm.toolkit.fluxcd.io/namespace: 6ae80fb984b7ca00015fa764
+      kubernetes.azure.com/managedby: aks
+    name: azure-wi-webhook-admin
+    namespace: kube-system
+    resourceVersion: "318"
+    uid: e5c7bff7-2dd1-4bd4-8477-036ba592c749
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: bootstrap-signer
+    namespace: kube-system
+    resourceVersion: "563"
+    uid: c6aa56cb-366f-4316-b861-d907be51e794
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: certificate-controller
+    namespace: kube-system
+    resourceVersion: "531"
+    uid: 3253fa45-ea5b-477c-bdce-ff9b92d4c94c
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: cilium
+      meta.helm.sh/release-namespace: kube-system
+    creationTimestamp: "2026-11-02T04:23:01Z"
+    labels:
+      app.kubernetes.io/actually-managed-by: Eno
+      app.kubernetes.io/managed-by: Helm
+    name: cilium
+    namespace: kube-system
+    resourceVersion: "307"
+    uid: 27892e8e-3827-46f6-9f0f-904dfb521b52
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: cilium
+      meta.helm.sh/release-namespace: kube-system
+    creationTimestamp: "2026-11-02T04:23:01Z"
+    labels:
+      app.kubernetes.io/actually-managed-by: Eno
+      app.kubernetes.io/managed-by: Helm
+    name: cilium-operator
+    namespace: kube-system
+    resourceVersion: "310"
+    uid: 8337fafc-c0d8-4b92-9bd8-5a56d18ad5a9
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","k8s-app":"cloud-node-manager","kubernetes.io/cluster-service":"true"},"name":"cloud-node-manager","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:11Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      k8s-app: cloud-node-manager
+      kubernetes.io/cluster-service: "true"
+    name: cloud-node-manager
+    namespace: kube-system
+    resourceVersion: "712"
+    uid: 2c7c3256-e6ef-4515-857e-9abbe7a4217c
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: clusterrole-aggregation-controller
+    namespace: kube-system
+    resourceVersion: "555"
+    uid: 4d730309-65ed-4070-87a8-7f0a2f355c91
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:22:58Z"
+    labels:
+      app.kubernetes.io/managed-by: Eno
+      kubernetes.io/cluster-service: "true"
+    name: coredns
+    namespace: kube-system
+    resourceVersion: "252"
+    uid: 6c1f608c-f7a3-4829-b5a5-843f2998b594
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:22:58Z"
+    labels:
+      app.kubernetes.io/managed-by: Eno
+    name: coredns-autoscaler
+    namespace: kube-system
+    resourceVersion: "251"
+    uid: 78a06ab9-a354-4e65-af1a-2b428872bc72
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:07Z"
+    name: cronjob-controller
+    namespace: kube-system
+    resourceVersion: "574"
+    uid: 2012a475-0a75-489f-ae5f-4cbbe77f3b67
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/bootstrapping":"rbac-defaults"},"name":"csi-azuredisk-node-sa","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:11Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: csi-azuredisk-node-sa
+    namespace: kube-system
+    resourceVersion: "727"
+    uid: e151a93b-5992-44d1-b6bf-3b5e85df5581
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/bootstrapping":"rbac-defaults"},"name":"csi-azurefile-node-sa","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:11Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: csi-azurefile-node-sa
+    namespace: kube-system
+    resourceVersion: "738"
+    uid: 2fe26197-443e-4615-b993-be425fc1b2ee
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: daemon-set-controller
+    namespace: kube-system
+    resourceVersion: "525"
+    uid: ed177862-9c84-4ad9-8d74-36219136c0cf
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:07Z"
+    name: default
+    namespace: kube-system
+    resourceVersion: "584"
+    uid: 958aaf41-0e70-4cf7-8fdd-48f53d228cd8
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app":"defender-admission-controller","kubernetes.azure.com/managedby":"aks"},"name":"defender-admission-controller-serviceaccount","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T05:46:03Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      app: defender-admission-controller
+      kubernetes.azure.com/managedby: aks
+    name: defender-admission-controller-serviceaccount
+    namespace: kube-system
+    resourceVersion: "26187"
+    uid: 2d14b461-09de-4c4f-a783-a624b95dbf4d
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: deployment-controller
+    namespace: kube-system
+    resourceVersion: "540"
+    uid: 07de37b8-3880-4b43-84ef-e831fbaafc05
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: device-taint-eviction-controller
+    namespace: kube-system
+    resourceVersion: "546"
+    uid: ddbc3156-6ee7-42b6-826e-3719e5ffdf73
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: disruption-controller
+    namespace: kube-system
+    resourceVersion: "526"
+    uid: 7b8e854e-0a3f-4618-9ada-5b919e9cb3c9
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: endpoint-controller
+    namespace: kube-system
+    resourceVersion: "549"
+    uid: 0e5d5db9-bf84-42cd-861d-8253ca42fd2f
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:06Z"
+    name: endpointslice-controller
+    namespace: kube-system
+    resourceVersion: "566"
+    uid: 13f38b4e-0ee3-4c28-b4b4-876ff5421c93
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:06Z"
+    name: endpointslicemirroring-controller
+    namespace: kube-system
+    resourceVersion: "567"
+    uid: e783697b-3b82-461d-9ac6-9fff0bbd601f
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: ephemeral-volume-controller
+    namespace: kube-system
+    resourceVersion: "528"
+    uid: 93054ad6-3426-471a-b4f3-ff028b3a16dc
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: expand-controller
+    namespace: kube-system
+    resourceVersion: "541"
+    uid: f2fae58c-c384-40e0-9c25-f0ec0d8862af
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: generic-garbage-collector
+    namespace: kube-system
+    resourceVersion: "524"
+    uid: 0fc57941-37e4-4375-9a22-0ed87b1a4358
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: horizontal-pod-autoscaler
+    namespace: kube-system
+    resourceVersion: "534"
+    uid: f76bb96e-a389-4567-855f-134e3f39b070
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: job-controller
+    namespace: kube-system
+    resourceVersion: "543"
+    uid: c583e934-55d0-447f-b9e9-b21af5134ef6
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"konnectivity-agent","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:12Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: konnectivity-agent
+    namespace: kube-system
+    resourceVersion: "753"
+    uid: 54565e43-8c04-4deb-8ce6-abe9672982d1
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"konnectivity-agent-autoscaler","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:12Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: konnectivity-agent-autoscaler
+    namespace: kube-system
+    resourceVersion: "764"
+    uid: 0bfd0ccf-d1ad-4db8-a2d4-0cbab7924bf5
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: legacy-service-account-token-cleaner
+    namespace: kube-system
+    resourceVersion: "536"
+    uid: 965f792c-e255-43f8-90d6-3131bc43b198
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"metrics-server","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T04:24:12Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      kubernetes.io/cluster-service: "true"
+    name: metrics-server
+    namespace: kube-system
+    resourceVersion: "778"
+    uid: d1c3b988-5daa-4411-82d9-035a1cec101d
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app.kubernetes.io/name":"defender-k8s-sensor","app.kubernetes.io/version":"0.10.45"},"name":"microsoft-defender-collector-sa","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T05:46:02Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      app.kubernetes.io/name: defender-k8s-sensor
+      app.kubernetes.io/version: 0.10.45
+    name: microsoft-defender-collector-sa
+    namespace: kube-system
+    resourceVersion: "26125"
+    uid: f74968ed-08e6-4002-8952-7fc48bfd607e
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app.kubernetes.io/name":"defender-k8s-sensor","app.kubernetes.io/version":"0.10.45"},"name":"microsoft-defender-publisher-sa","namespace":"kube-system"}}
+    creationTimestamp: "2026-11-02T05:46:02Z"
+    labels:
+      addonmanager.kubernetes.io/mode: Reconcile
+      app.kubernetes.io/name: defender-k8s-sensor
+      app.kubernetes.io/version: 0.10.45
+    name: microsoft-defender-publisher-sa
+    namespace: kube-system
+    resourceVersion: "26123"
+    uid: ac050c28-1050-486c-a0eb-96f8e65b48d7
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:06Z"
+    name: namespace-controller
+    namespace: kube-system
+    resourceVersion: "571"
+    uid: 8ca70055-63e7-4743-8131-c181250329ca
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: node-controller
+    namespace: kube-system
+    resourceVersion: "537"
+    uid: 35b98ae7-d764-4ef3-abd9-3e9be0c6a487
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: persistent-volume-binder
+    namespace: kube-system
+    resourceVersion: "552"
+    uid: 5029d1a9-47b7-4df0-894f-aa7b8ee67844
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: pod-garbage-collector
+    namespace: kube-system
+    resourceVersion: "542"
+    uid: 3a8f0e1e-08af-43f6-ac53-2792f9aafcb1
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: pv-protection-controller
+    namespace: kube-system
+    resourceVersion: "561"
+    uid: 972a67f7-e17b-435e-8287-4c70b5b399b8
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: pvc-protection-controller
+    namespace: kube-system
+    resourceVersion: "558"
+    uid: e14a394d-6b18-4009-9f22-1b304b8585f1
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:06Z"
+    name: replicaset-controller
+    namespace: kube-system
+    resourceVersion: "573"
+    uid: b2033fd0-b619-4582-92df-5cae13595b3d
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: replication-controller
+    namespace: kube-system
+    resourceVersion: "529"
+    uid: 507db360-2060-4418-8684-f62ab5074e96
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: resource-claim-controller
+    namespace: kube-system
+    resourceVersion: "562"
+    uid: 0ad9b1eb-42f1-4aa7-b3d5-520f68489c95
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:06Z"
+    name: resourcequota-controller
+    namespace: kube-system
+    resourceVersion: "570"
+    uid: 281011fc-6ad9-46c5-afed-4ffa371b6a61
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: root-ca-cert-publisher
+    namespace: kube-system
+    resourceVersion: "560"
+    uid: 7738f95b-7723-4305-828f-387dd42e3690
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: service-account-controller
+    namespace: kube-system
+    resourceVersion: "530"
+    uid: 83399c24-df84-40a5-83dd-1507254cb3d0
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: service-cidrs-controller
+    namespace: kube-system
+    resourceVersion: "547"
+    uid: ccb0fa2c-4b05-42a3-b6e5-2b79eeeb1407
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:04Z"
+    name: statefulset-controller
+    namespace: kube-system
+    resourceVersion: "551"
+    uid: 8a9faabd-bff5-4878-952c-9d65f7c5fc22
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:05Z"
+    name: token-cleaner
+    namespace: kube-system
+    resourceVersion: "565"
+    uid: 97e8ca50-f17f-478e-a34a-2a3b48c1b764
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: ttl-after-finished-controller
+    namespace: kube-system
+    resourceVersion: "535"
+    uid: 3c5fe750-e10f-4d34-a09a-57d99a044286
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: ttl-controller
+    namespace: kube-system
+    resourceVersion: "527"
+    uid: 2d92a047-57ca-475f-aed5-f503fa5c494f
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:02Z"
+    name: validatingadmissionpolicy-status-controller
+    namespace: kube-system
+    resourceVersion: "532"
+    uid: a492b3f3-f3b7-456e-8f59-4fe1a3ecaa9e
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T04:24:03Z"
+    name: volumeattributesclass-protection-controller
+    namespace: kube-system
+    resourceVersion: "544"
+    uid: 1c406b34-01c3-4d9c-9e19-13e63de4a6a0
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"alloy","namespace":"observability"}}
+    creationTimestamp: "2026-11-25T20:45:46Z"
+    name: alloy
+    namespace: observability
+    resourceVersion: "10467225"
+    uid: 37cf64a2-dc4f-402a-a1b1-8f7ec1d99c0a
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-25T20:45:46Z"
+    name: default
+    namespace: observability
+    resourceVersion: "10467224"
+    uid: 4eb0dfa9-d491-4007-95e8-5168c8609b5a
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"otel-collector","namespace":"observability"}}
+    creationTimestamp: "2026-11-25T20:45:46Z"
+    name: otel-collector
+    namespace: observability
+    resourceVersion: "10467227"
+    uid: 0fc3b6f4-ce34-4495-826f-59f6edaf9a96
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-19T15:43:15Z"
+    name: default
+    namespace: tollgate-front
+    resourceVersion: "7722490"
+    uid: e37a44be-6bf8-4967-818c-8cac20c24f1b
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2026-11-02T07:55:50Z"
+    name: default
+    namespace: traefik
+    resourceVersion: "65434"
+    uid: dcd79b49-8135-4316-99fd-692c832f7c63
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"traefik"},"name":"traefik","namespace":"traefik"}}
+    creationTimestamp: "2026-11-02T07:55:50Z"
+    labels:
+      app.kubernetes.io/name: traefik
+    name: traefik
+    namespace: traefik
+    resourceVersion: "65437"
+    uid: e9cc827e-d00b-40d2-9e64-b1554469fc1c
+- apiVersion: v1
+  imagePullSecrets:
+  - name: acr-pull
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"default","namespace":"wallet-billing"}}
+    creationTimestamp: "2026-11-02T05:46:50Z"
+    name: default
+    namespace: wallet-billing
+    resourceVersion: "26547"
+    uid: 726912c4-22ef-4eae-892e-2d85fd17d242
+kind: List
+metadata:
+  resourceVersion: ""
